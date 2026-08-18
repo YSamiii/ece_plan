@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect x="4" y="4" width="56" height="56" rx="18" fill="#F7FCEF" stroke="#CFE5B8" stroke-width="2"/>
-  <circle cx="18" cy="16" r="4" fill="#9ED36A" opacity=".7"/>
-  <rect x="18" y="22" width="28" height="20" rx="6" fill="#DDF2C3" stroke="#89B75C" stroke-width="2"/>
-  <path d="M25 26v12M32 26v12M39 26v12" stroke="#89B75C" stroke-width="2"/>
-  <circle cx="25" cy="30" r="3" fill="#F4D250"/><circle cx="32" cy="34" r="3" fill="#F2A95C"/><circle cx="39" cy="29" r="3" fill="#8CCAF0"/>
-  <path d="M22 46h20" stroke="#89B75C" stroke-width="2" stroke-linecap="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="18" fill="#F7FCEF" stroke="#CFE5B8" stroke-width="2"/><rect x="17" y="21" width="30" height="23" rx="7" fill="#DDF2C3" stroke="#89B75C" stroke-width="2"/><circle cx="25" cy="30" r="3" fill="#F4D250"/><circle cx="32" cy="35" r="3" fill="#F2A95C"/><circle cx="39" cy="29" r="3" fill="#8CCAF0"/></svg>
