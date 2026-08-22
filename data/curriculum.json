@@ -1,7 +1,7 @@
 {
   "format": "xixi-curriculum-v3",
-  "version": "2026.08.22.4",
-  "updated_at": "2026-08-22T13:34:00-04:00",
+  "version": "2026.08.22.8",
+  "updated_at": "2026-08-22T13:48:00-04:00",
   "description": "熹熹启蒙完整课程库（18–26月龄）图文版；已补充18月龄第3周新上传练习图片。课程库更新只影响课程内容，不覆盖宝宝资料或打卡记录。",
   "plans": [
     {
@@ -905,12 +905,12 @@
       "week": 3,
       "images": [
         {
-          "src": "data/assets/18m/week3/triangle-point-animals-1.jpg",
+          "src": "data/assets/18m/week3/triangle-point-animals-a-v2.png",
           "title": "三角形点点点练习图 1",
           "caption": "观察动物身上的三角形，用手指逐个点出来。"
         },
         {
-          "src": "data/assets/18m/week3/triangle-point-animals-2.jpg",
+          "src": "data/assets/18m/week3/triangle-point-animals-b-v2.png",
           "title": "三角形点点点练习图 2",
           "caption": "继续找动物身上的三角形；一次只看一只动物也可以。"
         }
@@ -954,7 +954,7 @@
       "week": 3,
       "images": [
         {
-          "src": "data/assets/18m/week3/lost-found-3.png",
+          "src": "data/assets/18m/week3/lost-found-3-v2.png",
           "title": "失物招领练习图",
           "caption": "蜂蜜 → 狐狸；花朵发卡 → 小羊；黄色团状物品 / 花蜜 → 小蜜蜂。"
         }
