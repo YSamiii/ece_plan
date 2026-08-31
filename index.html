@@ -580,9 +580,19 @@ function getImportedCourseDetails(){
   }catch(e){ return {}; }
 }
 function getCourseDetails(){ return {...baseCourseDetails,...getImportedCourseDetails()}; }
+function canonicalCourseKey(value){ return typeof value==='string' ? value.trim() : ''; }
+function getCourseDetail(key){
+  const canonicalKey=canonicalCourseKey(key);
+  return {key:canonicalKey,detail:getCourseDetails()[canonicalKey]||null};
+}
 
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
-function hasCourseDetail(x){return !!getCourseDetails()[x];}
+function hasCourseDetail(x){return !!getCourseDetail(x).detail;}
+function normalizeDetailItems(value){
+  if(Array.isArray(value)) return value.filter(item=>item!==null&&item!==undefined&&String(item).trim()!=='').map(String);
+  if(value===null||value===undefined||String(value).trim()==='') return [];
+  return String(value).split(/\r?\n/).map(item=>item.trim()).filter(Boolean);
+}
 function normalizeDetailImages(detailPart){
   const items=[];
   if(detailPart&&detailPart.image) items.push({src:detailPart.image,title:detailPart.image_title||detailPart.title||'课程图片',caption:detailPart.image_caption||''});
@@ -608,7 +618,8 @@ function buildCourseDetailHtml(d){
     html+=`<div class="detail-section"><h3>${escapeHtml(s.title)}</h3>`;
     if(s.text) html+=`<p>${escapeHtml(s.text)}</p>`;
     if(s.lyrics) html+=`<div class="detail-lyrics">${escapeHtml(s.lyrics)}</div>`;
-    if(s.items) html+=`<ul>${s.items.map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ul>`;
+    const sectionItems=normalizeDetailItems(s.items);
+    if(sectionItems.length) html+=`<ul>${sectionItems.map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ul>`;
     const sectionImages=normalizeDetailImages(s);
     if(sectionImages.length) html+=buildImageGallery(sectionImages,'相关图片');
     html+='</div>';
@@ -616,29 +627,35 @@ function buildCourseDetailHtml(d){
   html+='<div class="detail-tip">课程详情用于家长执行参考；带图片的课程现在可以直接在这里看练习卡，点击图片可放大。</div>';
   return html;
 }
+function handleCourseDetailClick(event){
+  const root=document.getElementById('content');
+  const btn=event.target.closest('[data-course-detail]');
+  if(!root||!btn||!root.contains(btn)) return;
+  event.preventDefault();
+  event.stopPropagation();
+  let key='';
+  try{ key=decodeURIComponent(btn.dataset.courseDetail||''); }catch(_){ return; }
+  const {detail}=getCourseDetail(key);
+  if(!detail) return;
+  const card=btn.closest('.item');
+  const panel=card&&card.querySelector('.inline-course-detail');
+  if(!panel) return;
+  const opening=panel.hasAttribute('hidden');
+  root.querySelectorAll('.inline-course-detail:not([hidden])').forEach(x=>x.setAttribute('hidden',''));
+  root.querySelectorAll('[data-course-detail].expanded').forEach(x=>{x.classList.remove('expanded');x.textContent='查看玩法 ›';});
+  if(opening){
+    panel.innerHTML=buildCourseDetailHtml(detail);
+    panel.removeAttribute('hidden');
+    btn.classList.add('expanded');
+    btn.textContent='收起玩法 ↑';
+    setTimeout(()=>{if(panel.isConnected&&!panel.hasAttribute('hidden')) panel.scrollIntoView({behavior:'smooth',block:'nearest'});},30);
+  }
+}
 function bindDetailButtons(){
-  document.querySelectorAll('.detail-btn[data-detail-key]').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      e.preventDefault();
-      e.stopPropagation();
-      const key=decodeURIComponent(btn.dataset.detailKey||'');
-      const d=getCourseDetails()[key];
-      if(!d) return;
-      const card=btn.closest('.item');
-      const panel=card && card.querySelector('.inline-course-detail');
-      if(!panel) return;
-      const opening=panel.hasAttribute('hidden');
-      document.querySelectorAll('.inline-course-detail:not([hidden])').forEach(x=>x.setAttribute('hidden',''));
-      document.querySelectorAll('.detail-btn.expanded').forEach(x=>{x.classList.remove('expanded');x.textContent='查看玩法 ›';});
-      if(opening){
-        panel.innerHTML=buildCourseDetailHtml(d);
-        panel.removeAttribute('hidden');
-        btn.classList.add('expanded');
-        btn.textContent='收起玩法 ↑';
-        setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),30);
-      }
-    },{passive:false});
-  });
+  const root=document.getElementById('content');
+  if(!root||root.dataset.detailControllerBound==='1') return;
+  root.dataset.detailControllerBound='1';
+  root.addEventListener('click',handleCourseDetailClick,false);
 }
 function openImageViewer(src,title,caption){
   const modal=document.getElementById('imageViewer');
@@ -671,7 +688,7 @@ function closeImageViewer(event){
 }
 
 function openCourseDetail(key){
-  const d=getCourseDetails()[key]; if(!d) return;
+  const {detail:d}=getCourseDetail(key); if(!d) return;
   document.getElementById('detailBody').innerHTML=buildCourseDetailHtml(d);
   document.getElementById('detailModal').classList.add('open');
   document.body.style.overflow='hidden';
@@ -701,7 +718,7 @@ function formatPlanItem(x,i,dailyLen){
   return `<div class="item ${i>=dailyLen?'extra':''}">
     <input type="checkbox" aria-label="完成此课程" ${localStorage.getItem(key(i))==='1'?'checked':''} onchange="localStorage.setItem(key(${i}),this.checked?'1':'0');updateProgress()">
     <div class="label">
-      <div class="course-line"><span class="type-chip ${meta.cls}"><img class="type-ill" src="${meta.icon}" alt="${type}">${type}</span>${hasDetail?`<button type="button" class="detail-btn" data-detail-key="${encodeURIComponent(x)}">查看玩法 ›</button>`:''}</div>
+      <div class="course-line"><span class="type-chip ${meta.cls}"><img class="type-ill" src="${meta.icon}" alt="${type}">${type}</span>${hasDetail?`<button type="button" class="detail-btn" data-course-detail="${encodeURIComponent(canonicalCourseKey(x))}">查看玩法 ›</button>`:''}</div>
       <div class="course-text">${content}</div>
     </div>
     ${hasDetail?'<div class="inline-course-detail" hidden></div>':''}
