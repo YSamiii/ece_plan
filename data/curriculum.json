@@ -1,8 +1,8 @@
 {
   "format": "xixi-curriculum-v3",
-  "version": "2026.08.22.8",
-  "updated_at": "2026-08-22T13:48:00-04:00",
-  "description": "熹熹启蒙完整课程库（18–26月龄）图文版；已补充18月龄第3周新上传练习图片。课程库更新只影响课程内容，不覆盖宝宝资料或打卡记录。",
+  "version": "2026.08.31.3",
+  "updated_at": "2026-08-31T00:00:00-04:00",
+  "description": "熹熹启蒙完整课程库（18–26月龄）图文版；已补充19月龄第1周完整课程详情与图文资源。轻量部署包仅包含 App 实际显示所需的本周图片，课程库更新不覆盖宝宝资料或打卡记录。",
   "plans": [
     {
       "month_age": 18,
@@ -1271,6 +1271,271 @@
           "text": "不是为了正式教授“必须分享”。3岁以内保护自我感受更重要；应在不损害宝宝自身利益、不强迫的前提下，让她体验分享带来的快乐和社交好处。"
         }
       ]
+    },
+    "语文｜中文儿歌：《p音儿歌：吹泡泡》": {
+      "title": "p音儿歌：吹泡泡",
+      "type": "语文 · 中文儿歌",
+      "month_age": 19,
+      "week": 1,
+      "sections": [
+        {
+          "title": "学习目标",
+          "text": "在听、看、做中感受 p 的爆破音，并愿意模仿吹、飘、泡泡等动作或单词。"
+        },
+        {
+          "title": "怎么玩",
+          "items": "先做“噗”一声吹泡泡的动作，再慢慢念儿歌或反复说“泡泡、飘飘、拍拍”。 看到泡泡时邀请宝宝用手指追一追、轻轻拍一拍；宝宝只模仿一个音或一个动作也很好。"
+        },
+        {
+          "title": "家长提示",
+          "text": "以开心的模仿游戏为主，不要求宝宝完整跟读。真实玩泡泡时注意不让泡泡液入口。"
+        }
+      ],
+      "intro": "借由吹泡泡的动作和节奏，轻松感受 p 音相关词语。"
+    },
+    "英语｜一阶儿歌：Hello Hello How Are You（打招呼歌）": {
+      "title": "Hello Hello How Are You",
+      "type": "英语 · 一阶儿歌",
+      "month_age": 19,
+      "week": 1,
+      "sections": [
+        {
+          "title": "核心表达",
+          "items": "Hello, hello. How are you? I am fine, thank you. Hello to you."
+        },
+        {
+          "title": "怎么玩",
+          "items": "面对宝宝挥手唱 hello hello；唱到 how are you 时停一下，给宝宝看、笑、挥手或回应的机会。 家长可用 I am fine, thank you 作为示范，再把 hello 放进起床、出门和见到朋友的真实场景。"
+        },
+        {
+          "title": "重点",
+          "text": "先建立“见面会问好”的意思，不需要要求完整回答。"
+        }
+      ],
+      "intro": "把日常打招呼变成一首短歌，在动作和重复中理解 hello 与 how are you。"
+    },
+    "英语｜分级绘本：What Color Is It (Green) 简单版": {
+      "intro": "通过绿色叶子、青蛙、乌龟、毛毛虫、气球等场景，反复理解 green。",
+      "week": 1,
+      "sections": [
+        {
+          "title": "核心句型",
+          "items": "What color is it? It is green."
+        },
+        {
+          "title": "怎么读",
+          "items": "每次只看一页或一个物品。 家长先指着图问 What color is it?，稍停顿后再示范 It is green. 宝宝可以先指一指、说 green，或只听和看。"
+        },
+        {
+          "title": "生活延伸",
+          "items": "散步时找叶子和草地，在家里找绿色玩具或衣服，把同一句型重复用起来。"
+        }
+      ],
+      "images": [
+        {
+          "title": "Green 绘本第 01 页",
+          "src": "data/assets/19m/week1/green-book-page-01.jpg",
+          "caption": "封面与导读页。"
+        },
+        {
+          "title": "Green 绘本第 02 页",
+          "src": "data/assets/19m/week1/green-book-page-02.jpg",
+          "caption": "封面与导读页。"
+        },
+        {
+          "title": "Green 绘本第 03 页",
+          "src": "data/assets/19m/week1/green-book-page-03.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 04 页",
+          "src": "data/assets/19m/week1/green-book-page-04.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 05 页",
+          "src": "data/assets/19m/week1/green-book-page-05.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 06 页",
+          "src": "data/assets/19m/week1/green-book-page-06.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 07 页",
+          "src": "data/assets/19m/week1/green-book-page-07.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 08 页",
+          "src": "data/assets/19m/week1/green-book-page-08.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 09 页",
+          "src": "data/assets/19m/week1/green-book-page-09.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 10 页",
+          "src": "data/assets/19m/week1/green-book-page-10.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 11 页",
+          "src": "data/assets/19m/week1/green-book-page-11.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 12 页",
+          "src": "data/assets/19m/week1/green-book-page-12.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 13 页",
+          "src": "data/assets/19m/week1/green-book-page-13.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        },
+        {
+          "title": "Green 绘本第 14 页",
+          "src": "data/assets/19m/week1/green-book-page-14.jpg",
+          "caption": "一起指认绿色物品，重复：What color is it? / It is green."
+        }
+      ],
+      "title": "What Color Is It? — Green",
+      "type": "英语 · 分级绘本",
+      "month_age": 19
+    },
+    "数学｜平面图形：认识三角形—物品对应": {
+      "intro": "把已经认识的三角形和生活中的相似物品联系起来，练习观察、猜想和验证。",
+      "week": 1,
+      "sections": [
+        {
+          "title": "学习目标",
+          "text": "在前期认识三角形的基础上，能从多种形状中找出三角形，并初步理解三角形可以对应到生活物品。"
+        },
+        {
+          "title": "玩法：遮挡 → 猜想 → 验证",
+          "items": "先遮住右侧物品，指着左侧三角形问“哪一个像三角形？” 让宝宝猜一猜或指一指。 再揭开右侧物品一起验证。 每次只做一张卡，做完可以在家里继续找三角形物品。"
+        },
+        {
+          "title": "家长提示",
+          "text": "不急着讲“三条边、三个角”等定义。宝宝答错时一起再观察即可，重点是建立图形和生活物品的联系。"
+        }
+      ],
+      "images": [
+        {
+          "title": "三角形物品对应练习卡 1",
+          "src": "data/assets/19m/week1/triangle-object-match-01.jpg",
+          "caption": "先遮住右侧物品，请宝宝猜哪一个像三角形；再揭开验证。"
+        },
+        {
+          "title": "三角形物品对应练习卡 2",
+          "src": "data/assets/19m/week1/triangle-object-match-02.jpg",
+          "caption": "先遮住右侧物品，请宝宝猜哪一个像三角形；再揭开验证。"
+        },
+        {
+          "title": "三角形物品对应练习卡 3",
+          "src": "data/assets/19m/week1/triangle-object-match-03.jpg",
+          "caption": "先遮住右侧物品，请宝宝猜哪一个像三角形；再揭开验证。"
+        },
+        {
+          "title": "三角形物品对应练习卡 4",
+          "src": "data/assets/19m/week1/triangle-object-match-04.jpg",
+          "caption": "先遮住右侧物品，请宝宝猜哪一个像三角形；再揭开验证。"
+        }
+      ],
+      "title": "认识三角形：物品对应",
+      "type": "数学 · 平面图形",
+      "month_age": 19
+    },
+    "数学｜观察能力：失物招领 5": {
+      "intro": "在“小动物去郊游”的场景里，通过失物找主人练习有序观察与关联匹配。",
+      "week": 1,
+      "sections": [
+        {
+          "title": "失物与主人",
+          "items": "竹子 → 熊猫 胡萝卜 → 小兔子 帽子 → 狐狸"
+        },
+        {
+          "title": "怎么玩",
+          "items": "先观察三位小动物和桌上的三件失物。 一次只看一件，例如先问“竹子是谁的？” 再从熊猫、小兔子、狐狸中逐一排查。 找到后说出理由，再继续下一件。"
+        },
+        {
+          "title": "家长提示",
+          "text": "可以先遮住部分画面，帮助宝宝一次只聚焦一个失物。重点是“先看失物，再找主人”的顺序，不追求速度。"
+        }
+      ],
+      "images": [
+        {
+          "title": "失物招领 5",
+          "src": "data/assets/19m/week1/lost-found-05.jpg",
+          "caption": "竹子 → 熊猫；胡萝卜 → 小兔子；帽子 → 狐狸。"
+        }
+      ],
+      "title": "失物招领 5",
+      "type": "数学 · 观察能力",
+      "month_age": 19
+    },
+    "数学｜生活数学：立体图形": {
+      "title": "生活里的数学：立体图形",
+      "type": "数学 · 生活数学",
+      "month_age": 19,
+      "week": 1,
+      "sections": [
+        {
+          "title": "学习目标",
+          "text": "通过触摸、滚动、堆叠等真实操作，感受球、盒子、圆柱形物体的不同特征。"
+        },
+        {
+          "title": "怎么玩",
+          "items": "准备球、积木盒、纸杯或罐子等安全物品。 请宝宝试一试“哪个会滚”“哪个可以叠起来”“哪个像小盒子”。 用“圆圆的球”“方方的盒子”“长长的罐子”等简单词描述。"
+        },
+        {
+          "title": "注意",
+          "text": "以体验和比较为主，不要求记住术语或给物体正式命名。"
+        }
+      ],
+      "intro": "从能摸、能拿、能滚动的日常物品出发，初步感受立体物体的不同。"
+    },
+    "语文｜宝宝版文学童谣：菊": {
+      "title": "菊",
+      "type": "语文 · 文学童谣",
+      "month_age": 19,
+      "week": 1,
+      "sections": [
+        {
+          "title": "童谣内容",
+          "lyrics": "秋菊花，卷头发\n黄的白，像爆炸\n天气冷，它不怕\n笑哈哈，开满啦"
+        },
+        {
+          "title": "怎么读",
+          "items": "读“卷头发”时用手指在头边绕一绕；读“黄的白”时指认颜色；读“天气冷”时抱抱自己；读“笑哈哈”时一起笑。 语速放慢、可重复读。"
+        }
+      ],
+      "intro": "用短句和画面感受秋菊的颜色、卷卷花瓣和不怕冷。"
+    },
+    "早教课：抽象认知具象化": {
+      "title": "抽象认知具象化",
+      "type": "早教课",
+      "month_age": 19,
+      "week": 1,
+      "sections": [
+        {
+          "title": "核心方法",
+          "text": "先让宝宝看见或亲手操作具体物品，再配上简短词语；同一个概念在不同日常场景中重复出现。"
+        },
+        {
+          "title": "怎么做",
+          "items": "教“大/小”时用两只大小明显不同的杯子；教“多/少”时摆两堆数量差异明显的积木；教“里面/外面”时用盒子和玩具。 家长边操作边只说关键短词，不一次讲太多。"
+        },
+        {
+          "title": "家长提示",
+          "text": "不把它变成问答测试。宝宝通过拿、放、看和模仿来理解，就已经是在学习。"
+        }
+      ],
+      "intro": "把抽象概念放进宝宝看得见、摸得到、做得到的生活情境中。"
     }
   }
 }
