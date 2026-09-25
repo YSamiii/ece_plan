@@ -168,6 +168,9 @@ button.small{border:0;border-radius:14px;padding:10px 12px;background:#fff6d9;co
 
 .course-line{align-items:center}
 @media (min-width:700px){.wrap{padding-top:24px}.head-avatar{width:72px;height:72px}}
+
+/* v20260925 audio controller */
+.detail-audio-player{margin:14px 0;padding:14px;border:1px solid #d7e9ef;border-radius:16px;background:#f6fbfd}.detail-audio-title{font-weight:800;margin-bottom:10px}.audio-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.audio-btn{border:0;border-radius:999px;padding:8px 12px;background:#276f8a;color:#fff;font-weight:700;touch-action:manipulation}.audio-loop[aria-pressed="true"]{background:#0f8a68}.audio-time{font-size:12px;color:#456}.audio-seek{width:100%;accent-color:#276f8a;touch-action:manipulation}
 </style>
 </head>
 <body>
@@ -609,9 +612,30 @@ function buildImageGallery(items,heading='图片资料'){
   if(!normalized.length) return '';
   return `<div class="detail-section"><h3>${escapeHtml(heading)}</h3><div class="detail-gallery">${normalized.map(img=>`<figure class="detail-figure"><button type="button" class="detail-image-btn" onclick="openImageViewer('${encodeURIComponent(img.src)}','${encodeURIComponent(img.title||'课程图片')}','${encodeURIComponent(img.caption||'')}')"><img class="detail-gallery-img" src="${img.src}" alt="${escapeHtml(img.title||'课程图片')}" loading="lazy"></button>${img.title||img.caption?`<figcaption class="detail-figcap"><b>${escapeHtml(img.title||'')}</b>${img.caption?`<div>${escapeHtml(img.caption)}</div>`:''}</figcaption>`:''}</figure>`).join('')}</div></div>`;
 }
-function buildCourseDetailHtml(d){
+
+const audioController=(()=>{
+  const prefKey='xixi-audio-loop-prefs-v1'; let activeAudio=null;
+  const prefs=()=>{try{const x=JSON.parse(localStorage.getItem(prefKey)||'{}');return x&&typeof x==='object'?x:{}}catch(_){return {}}};
+  const loopFor=k=>!!prefs()[k];
+  const saveLoop=(k,v)=>{const x=prefs();x[k]=!!v;localStorage.setItem(prefKey,JSON.stringify(x));};
+  const time=n=>{n=Number.isFinite(n)?Math.max(0,Math.floor(n)):0;return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');};
+  const playerFor=a=>a&&a.closest('[data-audio-player]');
+  function repaint(player){if(!player)return;const a=player.querySelector('audio');const seek=player.querySelector('[data-audio-seek]');const current=player.querySelector('[data-audio-current]');const total=player.querySelector('[data-audio-total]');const play=player.querySelector('[data-audio-action=play]');if(!a)return;if(seek){seek.max=Number.isFinite(a.duration)?a.duration:0;seek.value=a.currentTime||0;}if(current)current.textContent=time(a.currentTime);if(total)total.textContent=time(a.duration);if(play)play.textContent=a.paused?'播放':'暂停';}
+  function pauseAudio(a){if(a&&!a.paused)a.pause();repaint(playerFor(a));if(activeAudio===a)activeAudio=null;}
+  function pauseAllIn(root){root.querySelectorAll('audio[data-course-audio]').forEach(pauseAudio);}
+  function play(a){if(activeAudio&&activeAudio!==a)pauseAudio(activeAudio);activeAudio=a;a.play().then(()=>repaint(playerFor(a))).catch(()=>repaint(playerFor(a)));}
+  function click(event){const action=event.target.closest('[data-audio-action]');if(!action)return;const player=action.closest('[data-audio-player]');const a=player&&player.querySelector('audio[data-course-audio]');if(!a)return;event.preventDefault();let key='';try{key=decodeURIComponent(player.dataset.audioKey||'')}catch(_){key='';}if(action.dataset.audioAction==='play'){a.paused?play(a):pauseAudio(a);}else if(action.dataset.audioAction==='loop'){a.loop=!a.loop;saveLoop(key,a.loop);action.setAttribute('aria-pressed',String(a.loop));action.textContent='循环：'+(a.loop?'开':'关');}}
+  function input(event){const seek=event.target.closest('[data-audio-seek]');if(!seek)return;const a=seek.closest('[data-audio-player]')?.querySelector('audio[data-course-audio]');if(a&&Number.isFinite(a.duration)){a.currentTime=Number(seek.value)||0;repaint(playerFor(a));}}
+  function media(event){const a=event.target;if(!(a instanceof HTMLAudioElement)||!a.matches('audio[data-course-audio]'))return;if(event.type==='play'){if(activeAudio&&activeAudio!==a)pauseAudio(activeAudio);activeAudio=a;}if(event.type==='ended'&&!a.loop)activeAudio=null;repaint(playerFor(a));}
+  function bind(){const root=document.getElementById('content');if(!root||root.dataset.audioControllerBound==='1')return;root.dataset.audioControllerBound='1';root.addEventListener('click',click);root.addEventListener('input',input);['loadedmetadata','timeupdate','play','pause','ended'].forEach(type=>root.addEventListener(type,media,true));}
+  function htmlFor(audio,key){const loop=loopFor(key);return '<div class="detail-section detail-audio-player" data-audio-player data-audio-key="'+encodeURIComponent(key)+'"><h3>儿歌音频</h3><div class="detail-audio-title">'+escapeHtml(audio.title||'课程音频')+'</div><audio preload="metadata" playsinline data-course-audio src="'+escapeHtml(audio.src)+'" '+(loop?'loop':'')+'></audio><div class="audio-controls"><button type="button" class="audio-btn" data-audio-action="play">播放</button><button type="button" class="audio-btn audio-loop" data-audio-action="loop" aria-pressed="'+loop+'">循环：'+(loop?'开':'关')+'</button><span class="audio-time" data-audio-current>0:00</span><span class="audio-time">/</span><span class="audio-time" data-audio-total>0:00</span><input class="audio-seek" data-audio-seek type="range" min="0" max="0" value="0" aria-label="音频进度"></div></div>';}
+  return {bind,pauseAllIn,htmlFor};
+})();
+
+function buildCourseDetailHtml(d,courseKey=''){
   let html=`<div class="detail-type">🦊 ${escapeHtml(d.type)}</div><div class="detail-title">${escapeHtml(d.title)}</div><div class="detail-sub">${d.month_age?`${escapeHtml(d.month_age)}月龄 · `:''}${d.week?`第${escapeHtml(d.week)}周 · `:''}课程详情</div>`;
   if(d.intro) html+=`<div class="detail-section"><h3>这一课做什么</h3><p>${escapeHtml(d.intro)}</p></div>`;
+  if(d.audio&&d.audio.src) html+=audioController.htmlFor(d.audio,courseKey);
   const topImages=normalizeDetailImages(d);
   if(topImages.length) html+=buildImageGallery(topImages, topImages.length===1?'课程图片':'课程图片 / 练习卡');
   (d.sections||[]).forEach(s=>{
@@ -641,10 +665,11 @@ function handleCourseDetailClick(event){
   const panel=card&&card.querySelector('.inline-course-detail');
   if(!panel) return;
   const opening=panel.hasAttribute('hidden');
+  audioController.pauseAllIn(root);
   root.querySelectorAll('.inline-course-detail:not([hidden])').forEach(x=>x.setAttribute('hidden',''));
   root.querySelectorAll('[data-course-detail].expanded').forEach(x=>{x.classList.remove('expanded');x.textContent='查看玩法 ›';});
   if(opening){
-    panel.innerHTML=buildCourseDetailHtml(detail);
+    panel.innerHTML=buildCourseDetailHtml(detail,key);
     panel.removeAttribute('hidden');
     btn.classList.add('expanded');
     btn.textContent='收起玩法 ↑';
@@ -689,7 +714,7 @@ function closeImageViewer(event){
 
 function openCourseDetail(key){
   const {detail:d}=getCourseDetail(key); if(!d) return;
-  document.getElementById('detailBody').innerHTML=buildCourseDetailHtml(d);
+  document.getElementById('detailBody').innerHTML=buildCourseDetailHtml(d,key);
   document.getElementById('detailModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -800,6 +825,7 @@ function renderReward(done,total,pct){
 }
 
 function render(){
+  audioController.pauseAllIn(document.getElementById('content'));
   renderProfileSummary();
   renderTabs();
   const ws=currentPlanWeeks();
@@ -812,6 +838,7 @@ function render(){
   html += items.map((x,i)=>formatPlanItem(x,i,w.daily.length)).join("");
   document.getElementById("content").innerHTML=html;
   bindDetailButtons();
+  audioController.bind();
   updateProgress();
 }
 function updateProgress(){
