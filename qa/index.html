@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F4D250">
+<title>熹熹启蒙计划</title>
+<link rel="manifest" href="./manifest.webmanifest?v=9">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=9">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=9">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=9">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="./apple-touch-icon-precomposed.png?v=9">
+<link rel="shortcut icon" type="image/png" href="./favicon.png?v=9">
+<style>
+:root{--yellow:#f4d250;--yellow-soft:#fff8dc;--yellow-pale:#fffdf3;--gold:#e0b63a;--gold-deep:#b88817;--ink:#4d3c1f;--soft:#fffef8;--line:#f1e4b4;--mint:#eff7eb;}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#fff9dc 0%,#fffef9 220px);color:var(--ink)}
+header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#f8e07f,#f4d250);padding:12px 14px 10px;box-shadow:0 3px 16px #b8901014}
+.headrow{display:flex;align-items:center;justify-content:space-between;gap:14px;max-width:760px;margin:auto;background:linear-gradient(135deg,rgba(255,255,252,.96),rgba(255,249,223,.96));border:1px solid #efd98c;border-radius:26px;padding:12px 14px;box-shadow:0 10px 24px #be982212;position:relative;overflow:hidden}
+.headrow::after{content:"";position:absolute;right:-22px;top:-22px;width:92px;height:92px;border-radius:50%;background:radial-gradient(circle,#fff7bf 0%,rgba(255,247,191,.15) 70%,transparent 72%)}
+.headtext{min-width:0;flex:1;position:relative;z-index:1}
+.head-kicker{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:#8c6b12;background:#fff7d1;border:1px solid #eed57e;border-radius:999px;padding:4px 10px;margin-bottom:7px}
+.head-avatar{width:64px;height:64px;border-radius:18px;border:2px solid #fff1af;box-shadow:0 6px 14px #00000014;object-fit:cover;flex:0 0 auto;background:#fffdf0;position:relative;z-index:1}
+h1{font-size:24px;line-height:1.15;margin:0 0 4px;color:#a97708;letter-spacing:.5px}
+.sub{font-size:13px;color:#7c6526;opacity:1}
+.fox-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.fox-pills span{display:inline-block;font-size:12px;padding:4px 10px;border-radius:999px;background:#fffdf0;border:1px solid #efe1ab;color:#8d6b1a;font-weight:700}
+.wrap{max-width:760px;margin:auto;padding:16px 14px 92px}
+.card{background:linear-gradient(180deg,#fffefd,#fffbee);border-radius:24px;padding:16px;margin:0 0 14px;box-shadow:0 12px 28px #ccb04114;border:1px solid #f1e2ae;position:relative;overflow:hidden}
+.card::after{content:"";position:absolute;right:-18px;bottom:-18px;width:88px;height:88px;border-radius:50%;background:radial-gradient(circle,#fff5bf 0%,rgba(255,245,191,.08) 68%,transparent 70%)}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:#fffdf5;border-top:1px solid #efe2b2;display:grid;grid-template-columns:repeat(3,1fr);padding:8px max(14px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 18px #e1c35e12}
+.nav button{border:0;background:transparent;padding:6px 8px;font-weight:700;color:#9b8150;font-size:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:18px;transition:.2s ease}
+.nav button.active{color:var(--gold-deep);background:#fff8dc}
+.view{display:none} .view.active{display:block}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:14px}
+.tab{border:1px solid #f1e3b2;border-radius:18px;padding:11px 6px;background:linear-gradient(180deg,#fffef7,#fff7da);color:#8a7335;font-weight:800;box-shadow:0 5px 12px #c6ab460d;position:relative}
+.tab.active{background:linear-gradient(180deg,#fff2a4,#f7d95c);color:#6e510b;box-shadow:0 7px 14px #cfa9201f;border-color:#e9c74c}
+.tab.active::before{content:"✦";position:absolute;left:8px;top:4px;font-size:11px;color:#f1a800}
+.dayrow{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin:10px 0 14px}
+.day{border:1px solid #f1e3b2;border-radius:16px;padding:9px 2px;background:linear-gradient(180deg,#fffef9,#fff7e6);font-size:12px;color:#7b6741;font-weight:700;box-shadow:0 4px 10px #ccb2540a}
+.day.active{background:linear-gradient(180deg,#ffe98f,#f5d34d);color:#664b0a;font-weight:800;border-color:#e8c647;transform:translateY(-1px)}
+.section-title{font-size:17px;font-weight:800;margin:8px 0 12px;color:#ab7a0c;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+.item{display:flex;gap:12px;align-items:flex-start;padding:14px 14px;margin:0 0 10px;border:1px solid #f1e2b0;border-radius:20px;background:linear-gradient(180deg,#fffef9,#fff8e9);box-shadow:0 6px 14px #cfb44b0d;position:relative;z-index:1}
+.item:last-child{border-bottom:1px solid #f1e2b0}
+input[type=checkbox]{width:24px;height:24px;accent-color:#e6bd2f;flex:0 0 auto;margin-top:2px}
+.label{line-height:1.5;font-size:15px;color:#564321}
+.badge{display:inline-block;font-size:12px;padding:3px 8px;border-radius:999px;background:#fff2b7;margin-left:6px;color:#8a6507;border:1px solid #ead07a}
+.extra{background:linear-gradient(180deg,#fff8dd,#fff3c9);border:1px solid #ecd178;position:relative}
+.note{font-size:13px;line-height:1.55;color:#715d35;background:linear-gradient(180deg,#fffdf4,#fff7e4);border:1px solid #f0e0a5;border-radius:18px;padding:12px;position:relative;z-index:1}
+.note::before{content:"🌼";position:absolute;right:10px;top:8px;opacity:.35}
+.progress{height:10px;background:#f7eed0;border-radius:99px;overflow:hidden;margin-top:10px;position:relative;z-index:1}
+.bar{height:100%;background:linear-gradient(90deg,#efd96b,#dbb22d);width:0%}
+.controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;position:relative;z-index:1}
+button.small{border:0;border-radius:14px;padding:10px 12px;background:#fff6d9;color:#88631b;font-weight:700;border:1px solid #ecd888}
+.field{margin:14px 0;position:relative;z-index:1}
+.field label{display:block;font-size:14px;font-weight:700;margin-bottom:7px;color:#8a670f}
+.field input{width:100%;padding:13px 14px;border:1px solid #eadfb5;border-radius:16px;font-size:16px;background:#fffef8}
+.primary{width:100%;border:0;border-radius:16px;padding:13px 16px;background:linear-gradient(180deg,#f0d460,#ddb83a);color:#6a5009;font-size:16px;font-weight:900;box-shadow:0 6px 14px #d6b43a24}
+.profile-box{background:linear-gradient(135deg,#fff8de,#fffdf5);border:1px solid #efdc94;border-radius:22px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden;z-index:1}
+.big-age{font-size:30px;font-weight:900;margin:3px 0;color:#a97708}
+.muted{color:#8b7d68;font-size:13px}
+.warning{background:#fff8e9;border:1px solid #eed597;color:#7c6220;border-radius:16px;padding:12px;font-size:13px;line-height:1.5;margin-top:12px}
+.nav-icon{width:28px;height:28px;border-radius:10px;object-fit:cover;border:1px solid #eedf9f;background:#fffdf6;box-shadow:0 2px 8px #0000000a}
+.nav button.active .nav-icon{border-color:#e9cc63;box-shadow:0 4px 10px #d6b3371a}
+.nav-label{line-height:1}
+.course-panel{background:linear-gradient(180deg,#fffdf6,#fff9ea);border:1px dashed #e8d170;border-radius:22px;padding:12px}
+.item.extra::after{content:"狐狸加餐";position:absolute;right:12px;top:-10px;background:#e7c340;color:#6a5108;font-size:10px;font-weight:800;padding:3px 8px;border-radius:999px;box-shadow:0 4px 10px #d3b22a24}
+.profile-box::after{content:"🦊";position:absolute;right:14px;top:10px;font-size:24px;opacity:.18}
+.storybook-hero{display:flex;align-items:center;gap:14px;padding:16px 16px 14px;background:linear-gradient(135deg,#fffef8,#fff7da 62%,#fff0ba 100%);border:1px solid #ecd882}
+.storybook-hero::before{content:"";position:absolute;left:-20px;top:-18px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,#fff8c8 0%,rgba(255,248,200,.2) 68%,transparent 70%)}
+.storybook-hero::after{content:"";position:absolute;right:-8px;bottom:-8px;width:92px;height:92px;border-radius:50%;background:radial-gradient(circle,#fff0a8 0%,rgba(255,240,168,.16) 65%,transparent 67%)}
+.story-fox{width:78px;height:78px;border-radius:22px;object-fit:cover;border:2px solid #f1dc8a;background:#fffdf4;box-shadow:0 8px 18px #cda92b1f;position:relative;z-index:1}
+.story-copy{position:relative;z-index:1;flex:1;min-width:0}
+.story-kicker{display:inline-flex;align-items:center;gap:6px;background:#fff8d5;border:1px solid #efdf9d;color:#8b6d12;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800;margin-bottom:8px}
+.story-title{font-size:20px;font-weight:900;color:#9e7309;line-height:1.25;margin-bottom:6px}
+.story-sub{font-size:13px;color:#7d6732;line-height:1.5}
+.storybook-hero .story-mini{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+.storybook-hero .story-mini span{display:inline-block;background:#fffdf2;border:1px solid #efe3b1;border-radius:999px;padding:4px 9px;font-size:12px;color:#866717;font-weight:700}
+.course-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.type-chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:800;border:1px solid #eadca6;background:#fffdf3;color:#7b6219;box-shadow:0 2px 6px #d2b8470a}
+.type-emoji{font-size:14px;line-height:1}
+.type-chip.lang{background:#fff7cf;border-color:#eed67a}
+.type-chip.math{background:#f3fbeb;border-color:#cfe5b8}
+.type-chip.eng{background:#edf6ff;border-color:#c9ddf5}
+.type-chip.rhyme{background:#fff0f6;border-color:#f0c9da}
+.type-chip.music{background:#f3f0ff;border-color:#d8cff5}
+.type-chip.lesson{background:#fff4df;border-color:#edd19c}
+.type-chip.ext{background:#eef8ea;border-color:#cfe4c6}
+.type-chip.other{background:#fffdf3;border-color:#eadca6}
+.course-text{font-size:15px;line-height:1.5;color:#564321}
+.item .label{width:100%}
+.item::before{content:"";position:absolute;left:10px;top:10px;width:12px;height:12px;border-radius:50%;background:#fff3a8;opacity:.7}
+.progress-card-icon{margin-right:2px}
+.type-chip{padding:3px 8px 3px 5px}
+.type-ill{width:18px;height:18px;border-radius:6px;display:block;flex:0 0 auto}
+.reward-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#fffef8,#fff7db 60%,#ffeeb7 100%);border:1px solid #ead07b}
+.reward-card::before{content:"";position:absolute;left:-12px;top:-12px;width:78px;height:78px;border-radius:50%;background:radial-gradient(circle,#fff6bf 0%,rgba(255,246,191,.14) 70%,transparent 72%)}
+.reward-fox{width:64px;height:64px;border-radius:18px;object-fit:cover;border:2px solid #f0dd97;background:#fffef4;box-shadow:0 6px 14px #c7a52a1a;position:relative;z-index:1}
+.reward-copy{flex:1;position:relative;z-index:1}
+.reward-kicker{display:inline-flex;align-items:center;gap:6px;background:#fff8d8;border:1px solid #efde9b;color:#8c6f18;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800;margin-bottom:8px}
+.reward-title{font-size:18px;font-weight:900;color:#9f770d;line-height:1.25;margin-bottom:6px}
+.reward-sub{font-size:13px;color:#7b6630;line-height:1.5}
+.reward-stars{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.reward-star{font-size:22px;line-height:1;filter:drop-shadow(0 2px 2px rgba(0,0,0,.05))}
+.reward-star.off{opacity:.28}
+.reward-star.on{opacity:1}
+.reward-pill{display:inline-block;margin-top:8px;background:#fffef1;border:1px solid #eee0aa;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;color:#8a6a15}
+.weekly-card{background:linear-gradient(135deg,#fffef9,#fff9e5 58%,#fff0bf 100%);border:1px solid #ead684}
+.weekly-card::before{content:"";position:absolute;right:-18px;top:-18px;width:86px;height:86px;border-radius:50%;background:radial-gradient(circle,#fff6be 0%,rgba(255,246,190,.18) 68%,transparent 70%)}
+.weekly-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative;z-index:1}
+.weekly-kicker{display:inline-flex;align-items:center;gap:6px;background:#fff8d8;border:1px solid #efde9b;color:#8c6f18;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800;margin-bottom:8px}
+.weekly-title{font-size:18px;font-weight:900;color:#9f770d;line-height:1.25;margin-bottom:6px}
+.weekly-sub{font-size:13px;color:#7b6630;line-height:1.5}
+.weekly-pill{display:inline-block;background:#fffef1;border:1px solid #eee0aa;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800;color:#8a6a15;white-space:nowrap}
+.weekly-days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:14px;position:relative;z-index:1}
+.weekly-day{background:linear-gradient(180deg,#fffef9,#fff9ea);border:1px solid #efe1a8;border-radius:16px;padding:10px 6px 8px;text-align:center;box-shadow:0 4px 10px #ccb2540a}
+.weekly-day-name{font-size:11px;font-weight:800;color:#88671a;margin-bottom:6px}
+.weekly-mini-bar{height:8px;background:#f7eed0;border-radius:999px;overflow:hidden;margin:0 4px 6px}
+.weekly-mini-fill{height:100%;background:linear-gradient(90deg,#efd96b,#dbb22d);width:0%}
+.weekly-mini-text{font-size:11px;color:#7d6831;font-weight:700}
+.weekly-note{margin-top:10px;font-size:12px;color:#7c6730;position:relative;z-index:1}
+.update-drop{margin-top:14px;padding:22px 16px;border:2px dashed #e5cc69;border-radius:22px;background:linear-gradient(180deg,#fffef8,#fff8da);text-align:center;position:relative;z-index:1}
+.update-fox{font-size:38px;margin-bottom:6px}
+.update-title{font-size:17px;font-weight:900;color:#9f770d;margin-bottom:6px}
+.update-sub{font-size:13px;line-height:1.5;color:#7c6730;margin:0 auto 14px;max-width:440px}
+#planUpdateFile{position:absolute;left:-9999px}
+.update-file-label{display:block;cursor:pointer;margin:0 auto;max-width:240px}
+.update-success,.update-error{margin-top:14px;border-radius:16px;padding:12px 14px;font-size:13px;line-height:1.55}
+.update-success{background:#f0fae9;border:1px solid #cde5bc;color:#42652f}
+.update-error{background:#fff1ed;border:1px solid #efc4b7;color:#8a3e2c}
+.detail-btn{margin-left:auto;border:1px solid #ead57b;background:#fff9dc;color:#8a6811;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800;white-space:nowrap;cursor:pointer}
+.detail-btn:active{transform:scale(.98)}
+.detail-modal{position:fixed;inset:0;z-index:50;display:none;background:rgba(58,45,20,.32);backdrop-filter:blur(4px);padding:calc(18px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));align-items:flex-end;justify-content:center}
+.detail-modal.open{display:flex}
+.detail-sheet{width:min(720px,100%);max-height:88vh;overflow:auto;background:#fffdf5;border:1px solid #eadb9d;border-radius:28px 28px 22px 22px;box-shadow:0 22px 60px rgba(71,51,12,.25);padding:16px 16px 24px;position:relative}
+.detail-handle{width:46px;height:5px;border-radius:99px;background:#e7d9a7;margin:0 auto 12px}
+.detail-close{position:sticky;top:0;float:right;border:0;background:#fff4c6;color:#75580d;width:34px;height:34px;border-radius:50%;font-size:20px;line-height:34px;font-weight:700;z-index:2}
+.detail-type{display:inline-flex;align-items:center;gap:7px;background:#fff7cf;border:1px solid #ecd477;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800;color:#80610f;margin-bottom:8px}
+.detail-title{font-size:23px;font-weight:900;line-height:1.3;color:#76570c;padding-right:42px;margin-bottom:6px}
+.detail-sub{font-size:13px;color:#8b7a4a;margin-bottom:15px}
+.detail-section{background:#fffaf0;border:1px solid #efe1ad;border-radius:18px;padding:13px 14px;margin:10px 0}
+.detail-section h3{font-size:15px;color:#8e6a10;margin:0 0 8px}
+.detail-section p,.detail-section li{font-size:14px;line-height:1.65;color:#564a2e}
+.detail-section ul,.detail-section ol{margin:6px 0 0;padding-left:21px}
+.detail-lyrics{white-space:pre-line;font-size:15px;line-height:1.8;color:#4c4027}
+.detail-ref-img{width:100%;max-width:330px;border-radius:18px;border:1px solid #eadb9d;display:block;margin:8px auto 0}
+.detail-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:10px}
+.detail-figure{margin:0;background:#fff;border:1px solid #eadb9d;border-radius:16px;overflow:hidden;box-shadow:0 3px 10px rgba(165,132,30,.08)}
+.detail-image-btn{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer}
+.detail-gallery-img{width:100%;display:block;background:#fff9e8}
+.detail-figcap{padding:8px 10px 10px;font-size:12px;line-height:1.45;color:#7a6841}
+.image-viewer{position:fixed;inset:0;z-index:80;display:none;background:rgba(30,24,13,.78);padding:20px 14px calc(20px + env(safe-area-inset-bottom));align-items:center;justify-content:center}
+.image-viewer.open{display:flex}
+.image-viewer-sheet{position:relative;max-width:min(92vw,780px);max-height:90vh;width:100%;display:flex;flex-direction:column;align-items:center}
+.image-viewer-close{position:absolute;top:-12px;right:-4px;width:38px;height:38px;border-radius:999px;border:0;background:#fff;color:#5d4a20;font-size:28px;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.image-viewer-img{max-width:100%;max-height:75vh;border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+.image-viewer-caption{margin-top:12px;padding:10px 14px;background:rgba(255,255,255,.94);border-radius:14px;color:#5d4a20;font-size:14px;line-height:1.5;text-align:left;width:min(100%,720px)}
+.detail-tip{font-size:12px;color:#8b7a4a;background:#fff7df;border-radius:13px;padding:9px 10px;margin-top:8px}
+.inline-course-detail{width:100%;margin-top:12px;padding:12px;background:#fffdf6;border:1px solid #eadb9d;border-radius:16px;box-shadow:inset 0 0 0 1px #fff8d8}
+.inline-course-detail[hidden]{display:none!important}
+.inline-course-detail .detail-section{margin:8px 0;background:#fffaf0}
+.inline-course-detail .detail-title{font-size:18px;padding-right:0}
+.inline-course-detail .detail-sub{margin-bottom:10px}
+.detail-btn.expanded{background:#f4d250;color:#6f5307;border-color:#d8b92e}
+.item{flex-wrap:wrap}
+.item > input{align-self:flex-start}
+.item > .label{flex:1;min-width:0}
+
+.course-line{align-items:center}
+@media (min-width:700px){.wrap{padding-top:24px}.head-avatar{width:72px;height:72px}}
+
+/* v20260925 audio controller */
+.detail-audio-player{margin:14px 0;padding:14px;border:1px solid #d7e9ef;border-radius:16px;background:#f6fbfd}.detail-audio-title{font-weight:800;margin-bottom:10px}.audio-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.audio-btn{border:0;border-radius:999px;padding:8px 12px;background:#276f8a;color:#fff;font-weight:700;touch-action:manipulation}.audio-loop[aria-pressed="true"]{background:#0f8a68}.audio-time{font-size:12px;color:#456}.audio-seek{width:100%;accent-color:#276f8a;touch-action:manipulation}
+</style>
+</head>
+<body>
+<header>
+  <div class="headrow">
+    <div class="headtext">
+      <div class="head-kicker">🦊 小狐狸陪你学</div>
+      <h1 id="headerTitle">熹熹启蒙计划</h1>
+      <div class="sub" id="headerSub">快乐启蒙 · 智慧成长 · 自动匹配月龄安排</div>
+      <div class="fox-pills"><span>阳光黄主题</span><span>手绘小狐狸</span><span>18–26月龄</span></div>
+    </div>
+    <img class="head-avatar" src="top-avatar.png" alt="小狐狸头像">
+  </div>
+</header>
+
+<div class="wrap">
+  <section id="planView" class="view active">
+    <div id="profileSummary" class="profile-box"></div>
+    <div id="storybookHero" class="card storybook-hero"></div>
+    <div class="card course-panel">
+      <div class="tabs" id="weekTabs"></div>
+      <div class="dayrow" id="dayTabs"></div>
+      <div id="content"></div>
+    </div>
+    <div id="rewardCard" class="card reward-card"></div>
+    <div id="weeklyStatsCard" class="card weekly-card"></div>
+    <div class="card course-panel">
+      <div class="section-title">🌼 执行规则</div>
+      <div class="note">
+        每天完成当日基础启蒙；如该月龄已录入“早教课”，则在周一、周三、周五、周六加入打卡。每个月龄计划只在周一切换，保证同一周从周一到周日完整执行。当天状态一般时，可以缩短每项时间，但不取消语文、数学或英语中的任何一类。
+      </div>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div id="progressText" class="sub" style="margin-top:6px"></div>
+      <div class="controls">
+        <button class="small" onclick="resetToday()">重置今天</button>
+        <button class="small" onclick="resetAll()">清空全部记录</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="profileView" class="view">
+    <div class="card course-panel">
+      <div class="section-title">🐾 宝宝资料</div>
+      <div class="field">
+        <label for="babyName">宝宝名字</label>
+        <input id="babyName" type="text" placeholder="例如：熹熹" maxlength="20">
+      </div>
+      <div class="field">
+        <label for="birthDate">出生日期</label>
+        <input id="birthDate" type="date">
+      </div>
+      <button class="primary" onclick="saveProfile()">保存并匹配计划</button>
+      <div id="profileResult"></div>
+    </div>
+    <div class="card course-panel">
+      <div class="section-title">📒 月龄计算说明</div>
+      <div class="note">
+        系统按完整月龄计算。例如，从出生日期到今天满18个月但未满19个月，显示为18月龄。目前已加入18—26月龄计划，系统会根据宝宝完整月龄自动切换到对应计划。
+      </div>
+    </div>
+  </section>
+
+  <section id="updateView" class="view">
+    <div class="card course-panel">
+      <div class="section-title">📦 计划更新</div>
+      <div class="note">
+        以后新增月龄或补充课程详情时，只需更新课程库 JSON，不需要重新安装 App。你可以从 GitHub 自动检查更新，也可以手动导入文件；宝宝资料和打卡记录不会被覆盖。
+      </div>
+      <div class="update-drop">
+        <div class="update-fox">☁️</div>
+        <div class="update-title">从 GitHub 检查课程库</div>
+        <div class="update-sub">把最新版课程库上传到仓库的 <b>data/curriculum.json</b>，并把相关图片放进 <b>data/assets/</b>。以后你和朋友只需点这里，不需要重新安装 App。</div>
+        <button class="primary update-file-label" type="button" onclick="checkOnlineCurriculum()">检查并更新</button>
+      </div>
+      <div class="update-drop">
+        <div class="update-fox">🦊</div>
+        <div class="update-title">手动上传课程更新包</div>
+        <div class="update-sub">支持 .json 文件；如果课程里带图片，请同时把 GitHub 上的 <b>data/assets/</b> 文件夹一起更新。</div>
+        <input id="planUpdateFile" type="file" accept="application/json,.json" onchange="importPlanUpdate(event)">
+        <label class="primary update-file-label" for="planUpdateFile">选择更新包</label>
+      </div>
+      <div id="updateResult"></div>
+    </div>
+    <div class="card course-panel">
+      <div class="section-title">📚 当前计划库</div>
+      <div id="planLibrarySummary" class="note"></div>
+      <div class="controls">
+        <button class="small" onclick="exportPlanBackup()">导出计划备份</button>
+        <button class="small" onclick="downloadUpdateTemplate()">下载更新模板</button>
+        <button class="small" onclick="clearImportedPlans()">清除已导入更新</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="detailModal" class="detail-modal" onclick="closeCourseDetail(event)">
+  <div class="detail-sheet" onclick="event.stopPropagation()">
+    <div class="detail-handle"></div>
+    <button class="detail-close" onclick="closeCourseDetail()" aria-label="关闭">×</button>
+    <div id="detailBody"></div>
+  </div>
+</div>
+
+<div id="imageViewer" class="image-viewer" onclick="closeImageViewer(event)">
+  <div class="image-viewer-sheet" onclick="event.stopPropagation()">
+    <button class="image-viewer-close" onclick="closeImageViewer()" aria-label="关闭图片">×</button>
+    <img id="imageViewerImg" class="image-viewer-img" src="" alt="课程图片">
+    <div id="imageViewerCaption" class="image-viewer-caption" hidden></div>
+  </div>
+</div>
+
+<nav class="nav">
+  <button id="planNav" class="active" onclick="showView('plan')"><img class="nav-icon" src="fox-app-icon.png" alt="今日计划"><span class="nav-label">今日计划</span></button>
+  <button id="profileNav" onclick="showView('profile')"><img class="nav-icon" src="top-avatar.png" alt="宝宝资料"><span class="nav-label">宝宝资料</span></button>
+  <button id="updateNav" onclick="showView('update')"><img class="nav-icon" src="icon-other.svg" alt="计划更新"><span class="nav-label">计划更新</span></button>
+</nav>
+
+<script>
+const basePlans = [{"month_age":18,"week":1,"daily":["语文｜中文儿歌：《h音儿歌：小猴子》","英语｜一阶儿歌：I See Something Blue（我看见了一些蓝色的东西）","英语｜分级绘本：How Old Are You（简单版）","数学｜生活数学：分类","数学｜平面图形：认识三角形—动手做起来","数学｜观察能力：失物招领 1","语文｜宝宝版文学童谣：印刷术"],"extra_course":"早教课：听觉专注训练"},{"month_age":18,"week":2,"daily":["语文｜中文儿歌：《k音儿歌：小蝌蚪》","英语｜一阶儿歌：This Is Big（这是大的）","英语｜分级绘本：What Color Is It? — Red（简单版）","数学｜生活数学：远近","数学｜平面图形：认识三角形—到处找一找","数学｜观察能力：失物招领 2","语文｜宝宝版文学童谣：兰"],"extra_course":"早教课：锻炼口肌力量"},{"month_age":18,"week":3,"daily":["语文｜中文儿歌：《m音儿歌：小懒猫》","英语｜一阶儿歌：Good Morning, Mr. Rooster（早上好，公鸡先生）","英语｜分级绘本：What Color Is It? — Orange（简单版）","数学｜生活数学：估算","数学｜平面图形：认识三角形—点点点","数学｜观察能力：失物招领 3","语文｜宝宝版文学童谣：梅"],"extra_course":"早教课：精细动作"},{"month_age":18,"week":4,"daily":["语文｜中文儿歌：《n音儿歌：捏泥巴》","英语｜一阶儿歌：Make a Circle（围个圆圈）","英语｜分级绘本：What Color Is It? — Yellow（简单版）","数学｜生活数学：规律","数学｜平面图形：认识三角形—数一数","数学｜观察能力：失物招领 4","语文｜宝宝版文学童谣：竹"],"extra_course":"早教课：体会分享的快乐"},{"month_age":19,"week":1,"daily":["语文｜中文儿歌：《p音儿歌：吹泡泡》","英语｜一阶儿歌：Hello Hello How Are You（打招呼歌）","英语｜分级绘本：What Color Is It (Green) 简单版","数学｜平面图形：认识三角形—物品对应","数学｜观察能力：失物招领 5","数学｜生活数学：立体图形","语文｜宝宝版文学童谣：菊"],"extra_course":"早教课：抽象认知具象化"},{"month_age":19,"week":2,"daily":["语文｜中文儿歌：《t音儿歌：跳跳糖》","英语｜一阶儿歌：If You Are Happy（幸福拍手歌）","英语｜分级绘本：What Color Is It (Blue) 简单版","数学｜平面图形：认识三角形—拼一拼","数学｜观察能力：失物招领 6","数学｜生活数学：平面图形","语文｜宝宝版文学童谣：西游记"],"extra_course":"早教课：精细动作进阶训练"},{"month_age":19,"week":3,"daily":["语文｜中文儿歌：《q音儿歌：气球飞》","英语｜一阶儿歌：Goodbye（再见歌）","英语｜分级绘本：What Color Is It (Purple) 简单版","数学｜平面图形：认识正方形—动手做起来","数学｜观察能力：谁上车了 1","语文｜宝宝版文学童谣：水浒传"],"extra_course":"早教课：进一步加强弹跳力"},{"month_age":19,"week":4,"daily":["语文｜中文儿歌：《l音儿歌：捞小鱼》","英语｜一阶儿歌：Count and Move（数数并移动）","英语｜分级绘本：What Color Is It (White) 简单版","数学｜平面图形：认识正方形—到处找一找","数学｜观察能力：谁上车了 2","语文｜宝宝版文学童谣：三国演义"],"extra_course":"早教课：润色表达，高频引入形容词"},{"month_age":20,"week":1,"daily":["英语｜一阶儿歌：Hide and Seek（捉迷藏）","语文｜成长故事：自己穿衣服的小刺猬","英语｜分级绘本：What Color Is It (Black) 简单版","数学｜平面图形：认识正方形—点点点","数学｜观察能力：谁上车了 3","语文｜中文儿歌：《r音儿歌：软绵绵》","语文｜宝宝版文学童谣：红楼梦"],"extra_course":"早教课：全身协调性"},{"month_age":20,"week":2,"daily":["英语｜一阶儿歌：Let's Go to the Zoo 动作+动物（让我们去动物园吧）","语文｜成长故事：按时睡觉的小兔子","英语｜分级绘本：What Time Is It 简单版","数学｜平面图形：认识正方形—数一数","数学｜观察能力：谁上车了 4","语文｜中文儿歌：《x音儿歌：星星和小熊》","语文｜宝宝版文学童谣：长江"],"extra_course":"早教课：观察帮助社交"},{"month_age":20,"week":3,"daily":["英语｜一阶儿歌：Put on Your Shoes（穿上你的鞋子）","语文｜成长故事：爱干净的小熊猫","英语｜分级绘本：What Day Is It Today 简单版","数学｜平面图形：认识正方形—物品对应","数学｜观察能力：谁上车了 5","语文｜中文儿歌：《w音儿歌：晚安》","语文｜宝宝版文学童谣：黄河"],"extra_course":"早教课：完整表达"},{"month_age":20,"week":4,"daily":["英语｜一阶儿歌：Clean Up 动作+生活场景（收拾）","语文｜成长故事：整理玩具的小猴子","英语｜分级绘本：When Is Your Birthday 简单版","数学｜平面图形：认识正方形—拼一拼","数学｜观察能力：谁上车了 6","语文｜宝宝版文学童谣：四川","语文｜中文儿歌：《j音儿歌：小鸡仔》"],"extra_course":"早教课：认知情绪"},{"month_age":21,"week":1,"daily":["英语｜一阶儿歌：The Bath Song 动作+生活场景（洗澡歌）","语文｜成长故事：不剩饭的小鸡","英语｜分级绘本：Where Are You From 简单版","数学｜平面图形：认识长方形—动手做起来","数学｜观察能力：谁上车了 7","语文｜宝宝版文学童谣：浙江","语文｜中文儿歌：《c音儿歌：采草莓》"],"extra_course":"早教课：平衡能力发展"},{"month_age":21,"week":2,"daily":["英语｜一阶儿歌：The Wheels on the Bus 动作+交通工具（巴士上的轮子）","语文｜成长故事：主动打招呼的小山羊","英语｜分级绘本：How Do You Feel 简单版","数学｜平面图形：认识长方形—到处找一找","数学｜观察能力：一起连一连 1","语文｜宝宝版文学童谣：新疆","语文｜中文儿歌：《s音儿歌：松鼠和松果》"],"extra_course":"早教课：记忆力"},{"month_age":21,"week":3,"daily":["英语｜一阶儿歌：Can You Make a Happy Face 认识情绪（你能做出一个笑脸吗）","语文｜成长故事：自己吃饭的小野猪","英语｜分级绘本：What Is The Matter 简单版","数学｜平面图形：认识长方形—点点点","数学｜观察能力：一起连一连 2","语文｜宝宝版文学童谣：北京","语文｜中文儿歌：《y音儿歌：小鸭子》"],"extra_course":"早教课：精细动作"},{"month_age":21,"week":4,"daily":["英语｜一阶儿歌：The Shape Song 认识形状（形状之歌）","语文｜成长故事：按时上学的小狐狸","英语｜分级绘本：What Do You Like 简单版","数学｜平面图形：认识长方形—数一数","数学｜观察能力：右边多了什么 1","语文｜宝宝版文学童谣：湖南","语文｜中文儿歌：《z音儿歌：摘枣子》"],"extra_course":"早教课：抽象思维"},{"month_age":22,"week":1,"daily":["英语｜一阶儿歌：Yes I Can 基本句型（是的，我可以）","语文｜成长故事：爱运动的小熊","英语｜分级绘本：What Are You Doing 简单版","数学｜平面图形：认识长方形—物品对应","数学｜观察能力：右边多了什么 2","语文｜宝宝版文学童谣：河北","语文｜中文儿歌：《zh音儿歌：捉蝴蝶》"],"extra_course":"早教课：锻炼下肢力量和灵活性"},{"month_age":22,"week":2,"daily":["英语｜一阶儿歌：Twinkle Twinkle Little Star（一闪一闪亮晶晶）","语文｜成长故事：小蚂蚁的地下城堡","英语｜分级绘本：Where Are We Going 简单版","数学｜平面图形：认识长方形—拼一拼","数学｜观察能力：右边多了什么 3","语文｜中文儿歌：《ch音儿歌：小火车》"],"extra_course":"早教课：情绪管理"},{"month_age":22,"week":3,"daily":["英语｜一阶儿歌：The ABC Song（ABC字母歌）","语文｜成长故事：小松鼠观察季节变化","英语｜分级绘本：Jobs Around Me 简单版","数学｜观察能力：右边多了什么 4","语文｜中文儿歌：《sh音儿歌：踩水花》"],"extra_course":"早教课：引导宝宝社交力"},{"month_age":22,"week":4,"daily":["英语｜一阶儿歌：I Can See a Rainbow（我看到彩虹）","语文｜成长故事：小鸽子认识形状","英语｜分级绘本：What Can You Do 简单版","数学｜观察能力：右边多了什么 5","语文｜中文儿歌：《ye音儿歌：捡树叶》"],"extra_course":"早教课：语言发育"},{"month_age":23,"week":1,"daily":["英语｜一阶儿歌：Row, Row, Row Your Boat（划呀划，划起你的小船）","语文｜成长故事：小刺猬认识动物朋友","英语｜分级绘本：What Is This（简单版）","数学｜观察能力：它会吃什么呢 1","语文｜中文儿歌：《a音儿歌：追小鸭》"],"extra_course":"早教课：培养语言完整性"},{"month_age":23,"week":2,"daily":["英语｜一阶儿歌：Old MacDonald Had a Farm（麦当纳爷爷有个农场）","语文｜成长故事：小狐狸探索影子的秘密","英语｜分级绘本：Nice To Meet You（简单版）","数学｜观察能力：它会吃什么呢 2","语文｜中文儿歌：《o音儿歌：拔萝卜》"],"extra_course":"早教课：锻炼下肢力量和灵活性"},{"month_age":23,"week":3,"daily":["英语｜一阶儿歌：Bingo（宾果）","语文｜成长故事：小乌龟认识天气","英语｜分级绘本：Do You Like It（简单版）","数学｜观察能力：它会吃什么呢 3","语文｜中文儿歌：《e音儿歌：大白鹅》"],"extra_course":"早教课：情绪力培养"},{"month_age":23,"week":4,"daily":["英语｜一阶儿歌：Rain Rain Go Away（雨儿，雨儿快走开）","语文｜成长故事：小鸭子发现水的秘密","英语｜分级绘本：Go Shopping（简单版）","数学｜观察能力：它会吃什么呢 4","语文｜中文儿歌：《ü音儿歌：喂金鱼》"],"extra_course":"早教课：培养掌指核心发力"},{"month_age":24,"week":1,"daily":["语文｜识字游戏：人","语文｜古诗启蒙：咏鹅","数学｜数感启蒙：认识理解数字 1","英语｜分级绘本：Good Evening（简单版）","语文｜成长故事：小松鼠观察动物的尾巴","英语｜一阶儿歌：Five Little Monkeys（五只小猴子）","语文｜成语启蒙：一心一意","数学｜观察能力：它会吃什么呢 5","英语｜分级绘本：What's Your Name（简单版）","语文｜中文儿歌：《er音儿歌：灵耳朵》"],"extra_course":"早教课：培养手腕稳定性"},{"month_age":24,"week":2,"daily":["语文｜识字游戏：小","语文｜古诗启蒙：画","数学｜数感启蒙：认识理解数字 2","语文｜成长故事：小乌龟认识白天和黑夜","英语｜一阶儿歌：Happy New Year（新年好）","语文｜成语启蒙：三心二意","数学｜观察能力：它会吃什么呢 6","语文｜中文儿歌：《ang音儿歌：小山羊》"],"extra_course":"早教课：培养掌指核心发力"},{"month_age":24,"week":3,"daily":["语文｜识字游戏：一、二、三、八、十","语文｜古诗启蒙：悯农","数学｜数感启蒙：认识理解数字 3","英语｜分级绘本：I Like Balloons（简单版）","语文｜成长故事：一起玩的城堡积木","语文｜成语启蒙：五颜六色","数学｜观察能力：谁是小偷 1","语文｜中文儿歌：《eng音儿歌：放风筝》"],"extra_course":"早教课：情商培养"},{"month_age":24,"week":4,"daily":["语文｜识字游戏：月、飞、山、雨、田","语文｜古诗启蒙：江南","数学｜数感启蒙：认识理解数字 4","英语｜分级绘本：I Don't Like（简单版）","语文｜成长故事：对不起，没关系","语文｜成语启蒙：七上八下","数学｜观察能力：谁是小偷 2","语文｜中文儿歌：《ing音儿歌：小蜻蜓》"],"extra_course":"早教课：手眼专注力培养"},{"month_age":25,"week":1,"daily":["语文｜识字游戏：鼻、头、耳、眉","语文｜古诗启蒙：古朗月行","数学｜数感启蒙：认识理解数字 5","英语｜分级绘本：I Want To Eat（简单版）","语文｜成长故事：学会等待的小刺猬","语文｜成语启蒙：十全十美","数学｜观察能力：谁是小偷 3","语文｜中文儿歌：《ong音儿歌：小瓢虫》"],"extra_course":"早教课：手腕旋转与掌指协同"},{"month_age":25,"week":2,"daily":["语文｜识字游戏：鸟、牛、羊、狗、马","语文｜古诗启蒙：春晓","数学｜数感启蒙：认识理解数字 6","英语｜分级绘本：I Want To Buy（简单版）","语文｜成长故事：主动邀请的小鸽子","语文｜成语启蒙：和风细雨","数学｜观察能力：谁是小偷 4"],"extra_course":"早教课：下肢与核心力量"},{"month_age":25,"week":3,"daily":["语文｜识字游戏：不、会","语文｜古诗启蒙：寻隐者不遇","数学｜数感启蒙：认识理解数字 7","英语｜分级绘本：I Want To Go To School（简单版）","语文｜成长故事：不嘲笑别人的小猴子","语文｜成语启蒙：欢声笑语","数学｜观察能力：找不同 1"],"extra_course":"早教课：顺序记忆"},{"month_age":25,"week":4,"daily":["语文｜识字游戏：爸、妈","语文｜古诗启蒙：赠汪伦","数学｜数感启蒙：认识理解数字 8","英语｜分级绘本：Who Are You（简单版）","语文｜成长故事：分享玩具的小狐狸","语文｜成语启蒙：百花齐放","数学｜观察能力：找不同 2"],"extra_course":"早教课：感受物理力量"},{"month_age":26,"week":1,"daily":["语文｜识字游戏：车","语文｜古诗启蒙：静夜思","数学｜数感启蒙：认识理解数字9","英语｜分级绘本：I Have An Apple（简单版）","语文｜成长故事：排斥别人的小山羊","语文｜成语启蒙：风吹草动","数学｜观察能力：找不同3"],"extra_course":"早教课：身体协调培养"},{"month_age":26,"week":2,"daily":["语文｜古诗启蒙：池上","数学｜数感启蒙：认识理解数字10","英语｜分级绘本：It Is Colorful（简单版）","语文｜成长故事：兔龟赛跑的小刺猬","语文｜成语启蒙：九牛一毛","数学｜观察能力：找不同4"],"extra_course":"早教课：空间认知"},{"month_age":26,"week":3,"daily":["语文｜识字游戏：果","语文｜古诗启蒙：小池","英语｜分级绘本：Luna's House（简单版）","语文｜成长故事：礼貌借物的小兔子","语文｜成语启蒙：万里无云","数学｜数感启蒙：认识理解数字11","数学｜观察能力：找不同5"],"extra_course":"早教课：让语言更丰富"},{"month_age":26,"week":4,"daily":["语文｜识字游戏：男、女","语文｜古诗启蒙：风","英语｜分级绘本：This Is My Family（简单版）","语文｜成长故事：接纳不同的小猴子","语文｜成语启蒙：勤学好问","数学｜数感启蒙：认识理解数字12","数学｜观察能力：动物小侦探1"],"extra_course":"早教课：专注力"}];
+const days = ["周一","周二","周三","周四","周五","周六","周日"];
+const extraDays = new Set([0,2,4,5]);
+let currentWeek = 0;
+let currentDay = Math.max(0, Math.min(6, (new Date().getDay()+6)%7));
+let matchedMonthAge = 18;
+
+function getImportedPlans(){
+  try{
+    const value=JSON.parse(localStorage.getItem("xixi-imported-plans")||"[]");
+    if(!Array.isArray(value)) return [];
+    return value.map(p=>{
+      const clean={month_age:Number(p.month_age),week:Number(p.week),daily:Array.isArray(p.daily)?p.daily:[]};
+      if(typeof p.extra_course==="string"&&p.extra_course.trim()) clean.extra_course=p.extra_course.trim();
+      return clean;
+    });
+  }catch(e){ return []; }
+}
+function getAllPlans(){
+  const merged=new Map();
+  [...basePlans,...getImportedPlans()].forEach(plan=>{
+    if(plan && Number.isInteger(Number(plan.month_age)) && Number.isInteger(Number(plan.week))){
+      const normalized={...plan,month_age:Number(plan.month_age),week:Number(plan.week)};
+      merged.set(`${normalized.month_age}-${normalized.week}`,normalized);
+    }
+  });
+  return [...merged.values()].sort((a,b)=>a.month_age-b.month_age||a.week-b.week);
+}
+function normalizeUpdatePayload(payload){
+  const source=Array.isArray(payload)?payload:(payload&&Array.isArray(payload.plans)?payload.plans:null);
+  if(!source) throw new Error("更新包中未找到 plans 数组");
+  return source.map((p,index)=>{
+    const month_age=Number(p.month_age);
+    const week=Number(p.week);
+    if(!Number.isInteger(month_age)||month_age<1) throw new Error(`第${index+1}条的 month_age 无效`);
+    if(!Number.isInteger(week)||week<1||week>6) throw new Error(`第${index+1}条的 week 无效`);
+    if(!Array.isArray(p.daily)||p.daily.length===0||!p.daily.every(x=>typeof x==="string"&&x.trim())) throw new Error(`第${index+1}条缺少有效 daily 内容`);
+    const clean={month_age,week,daily:p.daily.map(x=>x.trim())};
+    if(typeof p.extra_course==="string"&&p.extra_course.trim()) clean.extra_course=p.extra_course.trim();
+    return clean;
+  });
+}
+function normalizeCourseDetails(payload){
+  const source=payload&&payload.course_details;
+  if(!source) return {};
+  if(typeof source!=="object"||Array.isArray(source)) throw new Error("course_details 格式无效");
+  const clean={};
+  Object.entries(source).forEach(([key,d])=>{
+    if(!key.trim()||!d||typeof d!=="object"||Array.isArray(d)) return;
+    clean[key.trim()]=d;
+  });
+  return clean;
+}
+function applyCurriculumPayload(payload){
+  const incoming=normalizeUpdatePayload(payload);
+  const incomingDetails=normalizeCourseDetails(payload);
+  const merged=new Map(getImportedPlans().map(p=>[`${p.month_age}-${p.week}`,p]));
+  incoming.forEach(p=>merged.set(`${p.month_age}-${p.week}`,p));
+  localStorage.setItem("xixi-imported-plans",JSON.stringify([...merged.values()]));
+  const detailMerged={...getImportedCourseDetails(),...incomingDetails};
+  localStorage.setItem("xixi-imported-course-details",JSON.stringify(detailMerged));
+  return {incoming,incomingDetails};
+}
+function importPlanUpdate(event){
+  const file=event.target.files&&event.target.files[0];
+  if(!file) return;
+  const result=document.getElementById("updateResult");
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const payload=JSON.parse(reader.result);
+      const {incoming,incomingDetails}=applyCurriculumPayload(payload);
+      const ages=[...new Set(incoming.map(p=>p.month_age))].sort((a,b)=>a-b);
+      result.innerHTML=`<div class="update-success">导入成功：共更新 ${incoming.length} 周，涉及 ${ages.join("、")} 月龄；同步 ${Object.keys(incomingDetails).length} 条课程详情。计划已立即生效，无需重新安装。</div>`;
+      syncScheduleToToday();
+      renderPlanLibrarySummary();
+      render();
+    }catch(err){ result.innerHTML=`<div class="update-error">导入失败：${err.message}</div>`; }
+    event.target.value="";
+  };
+  reader.onerror=()=>{result.innerHTML='<div class="update-error">文件读取失败，请重新选择。</div>';};
+  reader.readAsText(file,'utf-8');
+}
+async function checkOnlineCurriculum(){
+  const result=document.getElementById("updateResult");
+  result.innerHTML='<div class="update-success">正在检查 GitHub 课程库…</div>';
+  try{
+    const res=await fetch(`./data/curriculum.json?v=${Date.now()}`,{cache:"no-store"});
+    if(!res.ok) throw new Error(`无法读取课程库（HTTP ${res.status}）`);
+    const payload=await res.json();
+    const {incoming,incomingDetails}=applyCurriculumPayload(payload);
+    const version=payload.version||"未标注版本";
+    result.innerHTML=`<div class="update-success">课程库已更新到 <b>${escapeHtml(version)}</b>：${incoming.length} 周计划，${Object.keys(incomingDetails).length} 条课程详情。宝宝资料和打卡记录均已保留。</div>`;
+    syncScheduleToToday();
+    renderPlanLibrarySummary();
+    render();
+  }catch(err){
+    result.innerHTML=`<div class="update-error">在线更新失败：${escapeHtml(err.message)}。请确认 GitHub 仓库中已上传 data/curriculum.json，或改用下方手动导入。</div>`;
+  }
+}
+
+function renderPlanLibrarySummary(){
+  const el=document.getElementById("planLibrarySummary");
+  if(!el) return;
+  const all=getAllPlans();
+  const imported=getImportedPlans();
+  const ages=[...new Set(all.map(p=>p.month_age))].sort((a,b)=>a-b);
+  el.innerHTML=`目前共有 <b>${all.length}</b> 周计划，覆盖 <b>${ages[0]}–${ages[ages.length-1]}月龄</b>。已通过更新包导入 <b>${imported.length}</b> 周；课程详情共 <b>${Object.keys(getCourseDetails()).length}</b> 条。`;
+}
+function exportPlanBackup(){
+  const data={format:"xixi-curriculum-v3",exported_at:new Date().toISOString(),plans:getImportedPlans(),course_details:getImportedCourseDetails()};
+  downloadJson(data,`熹熹启蒙计划_已导入更新备份_${new Date().toISOString().slice(0,10)}.json`);
+}
+function downloadUpdateTemplate(){
+  const template={format:"xixi-curriculum-v3",version:"YYYY.MM.DD.1",plans:[{month_age:27,week:1,daily:["语文｜示例课程","数学｜示例课程","英语｜示例课程"],extra_course:"早教课：示例"}],course_details:{"语文｜示例课程":{month_age:27,week:1,type:"语文",title:"示例课程",intro:"简短说明",sections:[{title:"怎么做",items:["步骤1","步骤2"]}]}}};
+  downloadJson(template,"熹熹启蒙计划_更新包模板.json");
+}
+function downloadJson(data,name){
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+function clearImportedPlans(){
+  if(confirm("确定清除所有通过更新包导入的计划吗？内置18–26月龄计划不会删除。")){
+    localStorage.removeItem("xixi-imported-plans");
+    localStorage.removeItem("xixi-imported-course-details");
+    syncScheduleToToday();
+    document.getElementById("updateResult").innerHTML='<div class="update-success">已清除导入内容，保留内置18–26月龄计划。</div>';
+    renderPlanLibrarySummary();render();
+  }
+}
+
+function getProfile(){
+  try{ return JSON.parse(localStorage.getItem("xixi-profile")||"{}"); }catch(e){ return {}; }
+}
+
+function startOfDay(date){
+  return new Date(date.getFullYear(),date.getMonth(),date.getDate());
+}
+function daysInMonth(year,month){
+  return new Date(year,month+1,0).getDate();
+}
+function monthAnniversary(birth,months){
+  const y=birth.getFullYear();
+  const m=birth.getMonth()+months;
+  const year=y+Math.floor(m/12);
+  const month=((m%12)+12)%12;
+  const day=Math.min(birth.getDate(),daysInMonth(year,month));
+  return new Date(year,month,day);
+}
+function nextMondayOnOrAfter(date){
+  const d=startOfDay(date);
+  const weekday=d.getDay();
+  const add=(8-weekday)%7;
+  d.setDate(d.getDate()+add);
+  return d;
+}
+function calcMonthAgeAt(dateString,targetDate=new Date()){
+  if(!dateString) return null;
+  const birth=new Date(dateString+"T00:00:00");
+  const target=startOfDay(targetDate);
+  if(isNaN(birth.getTime())||birth>target) return null;
+  let months=(target.getFullYear()-birth.getFullYear())*12+(target.getMonth()-birth.getMonth());
+  if(target<monthAnniversary(birth,months)) months--;
+  return Math.max(0,months);
+}
+function calcMonthAge(dateString){ return calcMonthAgeAt(dateString,new Date()); }
+function availableAges(){
+  return [...new Set(getAllPlans().map(p=>p.month_age))].sort((a,b)=>a-b);
+}
+function matchPlanAge(age){
+  const ages=availableAges();
+  if(age===null||!ages.length) return ages[0]??0;
+  if(ages.includes(age)) return age;
+  const lower=ages.filter(x=>x<=age);
+  return lower.length?lower[lower.length-1]:ages[0];
+}
+function getSchedulePosition(dateString,targetDate=new Date()){
+  const ages=availableAges();
+  if(!dateString||!ages.length) return {age:ages[0]??0,weekIndex:0,calendarAge:null};
+  const birth=new Date(dateString+"T00:00:00");
+  const today=startOfDay(targetDate);
+  const calendarAge=calcMonthAgeAt(dateString,today);
+  if(calendarAge===null) return {age:ages[0],weekIndex:0,calendarAge:null};
+  const currentActivation=nextMondayOnOrAfter(monthAnniversary(birth,calendarAge));
+  const effectiveCalendarAge=today<currentActivation?Math.max(0,calendarAge-1):calendarAge;
+  const matchedAge=matchPlanAge(effectiveCalendarAge);
+  const activation=nextMondayOnOrAfter(monthAnniversary(birth,matchedAge));
+  let weekIndex=Math.floor((today-activation)/(7*24*60*60*1000));
+  const weeks=getAllPlans().filter(p=>p.month_age===matchedAge).length||1;
+  weekIndex=Math.max(0,Math.min(weeks-1,weekIndex));
+  return {age:matchedAge,weekIndex,calendarAge,effectiveCalendarAge,activation};
+}
+function syncScheduleToToday(){
+  const p=getProfile();
+  const pos=getSchedulePosition(p.birthDate,new Date());
+  matchedMonthAge=pos.age;
+  currentWeek=pos.weekIndex;
+  currentDay=Math.max(0,Math.min(6,(new Date().getDay()+6)%7));
+  return pos;
+}
+
+function ageDetail(dateString){
+  const birth = new Date(dateString+"T00:00:00");
+  const today = new Date();
+  if(isNaN(birth.getTime()) || birth > today) return "";
+  let months = calcMonthAge(dateString);
+  let anchor = new Date(birth);
+  anchor.setMonth(anchor.getMonth()+months);
+  let days = Math.floor((today-anchor)/(1000*60*60*24));
+  return `${months}个月${days>0?days+"天":""}`;
+}
+
+function showView(name){
+  document.getElementById("planView").classList.toggle("active",name==="plan");
+  document.getElementById("profileView").classList.toggle("active",name==="profile");
+  document.getElementById("updateView").classList.toggle("active",name==="update");
+  document.getElementById("planNav").classList.toggle("active",name==="plan");
+  document.getElementById("profileNav").classList.toggle("active",name==="profile");
+  document.getElementById("updateNav").classList.toggle("active",name==="update");
+  if(name==="profile") loadProfileForm();
+  if(name==="update") renderPlanLibrarySummary();
+}
+
+function loadProfileForm(){
+  const p=getProfile();
+  document.getElementById("babyName").value=p.name||"";
+  document.getElementById("birthDate").value=p.birthDate||"";
+  renderProfileResult();
+}
+
+function saveProfile(){
+  const name=document.getElementById("babyName").value.trim();
+  const birthDate=document.getElementById("birthDate").value;
+  if(!name){ alert("请输入宝宝名字"); return; }
+  const age=calcMonthAge(birthDate);
+  if(age===null){ alert("请选择有效的出生日期"); return; }
+  localStorage.setItem("xixi-profile",JSON.stringify({name,birthDate}));
+  syncScheduleToToday();
+  renderProfileResult();
+  render();
+  showView("plan");
+}
+
+function renderProfileResult(){
+  const p=getProfile();
+  const box=document.getElementById("profileResult");
+  if(!p.birthDate){box.innerHTML="";return;}
+  const age=calcMonthAge(p.birthDate);
+  const pos=getSchedulePosition(p.birthDate);
+  const matched=pos.age;
+  box.innerHTML=`<div class="profile-box" style="margin-top:14px">
+    <div class="muted">${p.name||"宝宝"}当前月龄</div>
+    <div class="big-age">${ageDetail(p.birthDate)}</div>
+    <div>已匹配：${matched}月龄启蒙计划</div>
+    ${age!==matched?`<div class="warning">当前资料库暂未加入${age}月龄计划，因此先显示最近可用的${matched}月龄计划。加入新的月龄内容后会自动切换。</div>`:""}
+  </div>`;
+}
+
+function renderProfileSummary(){
+  const p=getProfile();
+  const age=p.birthDate?calcMonthAge(p.birthDate):null;
+  const pos=p.birthDate?getSchedulePosition(p.birthDate):null;
+  const el=document.getElementById("profileSummary");
+  if(!p.name || age===null){
+    el.innerHTML=`<div class="muted">尚未设置宝宝资料</div><div class="big-age">18月龄计划</div><button class="small" onclick="showView('profile')">设置名字和出生日期</button>`;
+  }else{
+    el.innerHTML=`<div class="muted">${p.name}当前月龄</div><div class="big-age">${ageDetail(p.birthDate)}</div><div>正在使用：${matchedMonthAge}月龄 · 第${currentWeek+1}周计划</div>${age!==matchedMonthAge?`<div class="warning">本周会完整执行到周日，下周一再切换到${age}月龄第1周。</div>`:""}`;
+    document.getElementById("headerTitle").textContent=`${p.name}启蒙计划`;
+  }
+}
+
+function currentPlanWeeks(){
+  return getAllPlans().filter(p=>p.month_age===matchedMonthAge);
+}
+
+function key(i){return `xixi-m${matchedMonthAge}-w${currentWeek+1}-d${currentDay+1}-i${i}`;}
+function renderTabs(){
+  const ws=currentPlanWeeks();
+  if(currentWeek>=ws.length) currentWeek=0;
+  const wt=document.getElementById("weekTabs");
+  wt.innerHTML=ws.map((w,i)=>`<button class="tab ${i===currentWeek?'active':''}" onclick="currentWeek=${i};render()">第${w.week}周</button>`).join("");
+  const dt=document.getElementById("dayTabs");
+  dt.innerHTML=days.map((d,i)=>`<button class="day ${i===currentDay?'active':''}" onclick="currentDay=${i};render()">${d}</button>`).join("");
+}
+const baseCourseDetails={"语文｜中文儿歌：《k音儿歌：小蝌蚪》":{"month_age":18,"week":2,"type":"语文 · 中文儿歌","title":"k音儿歌：小蝌蚪","intro":"通过短儿歌反复听、说 k 音相关词语，保持轻松的语言浸润。","sections":[{"title":"儿歌内容","lyrics":"快看快看，快看快看\n蝌蚪游，蝌蚪游\n游来游去好可爱\n游来游去游好快\n游好快，游好快"},{"title":"怎么玩","items":["家长先用有节奏、稍夸张的语气念一遍。","念到“游”时可以用手指模仿小蝌蚪游动。","宝宝愿意时，跟说单个词或句尾即可，不要求完整跟读。"]}]},"英语｜一阶儿歌：This Is Big（这是大的）":{"month_age":18,"week":2,"type":"英语 · 一阶儿歌","title":"This Is Big","intro":"用动作和声音体验 big/small、loud/quiet、fast/slow、yes/no 四组对比概念。","sections":[{"title":"核心词组","items":["big / small：大 / 小","loud / quiet：大声 / 安静","fast / slow：快 / 慢","yes / no：是 / 否"]},{"title":"家长带法","items":["big 时把手臂张大，small 时双手缩小。","loud 用稍大的声音，quiet 压低声音并配合“嘘”的动作。","fast / slow 可配合走路、拍手或玩具移动速度变化。","yes / no 配合点头和摇头。"]},{"title":"重点","text":"不需要宝宝唱完整首歌，重点是通过重复、动作和对比建立词义联结。"}]},"英语｜分级绘本：What Color Is It? — Red（简单版）":{"month_age":18,"week":2,"type":"英语 · 分级绘本","title":"What Color Is It? — Red","intro":"围绕红色物品重复同一个问答句型，在大量重复中建立 red 的理解。","sections":[{"title":"核心句型","items":["What color is it?","It is red."]},{"title":"绘本中的红色物品","items":["apple 苹果","strawberry 草莓","fire truck 消防车","rose 玫瑰","red balloon 红色气球"]},{"title":"怎么读","items":["家长先指着图片问 What color is it?，停顿一下给宝宝回应机会。","宝宝不回答也没关系，家长直接示范 It is red.。","读完后在家里继续找红色物品，把同一句型带到真实生活中。"]}]},"数学｜生活数学：远近":{"month_age":18,"week":2,"type":"数学 · 生活数学","title":"生活里的数学：远近","intro":"在真实生活场景中建立“远”和“近”的基础距离概念。","sections":[{"title":"学习目标","text":"通过直观观察，让宝宝感受物体距离的远近，并把远近和视觉呈现联系起来。重点是感知，不追求准确回答。"},{"title":"怎么做","items":["选择窗边、阳台、散步等视野开阔的场景。","选距离差异明显的对象，如楼房和山、小鸟和楼房、身边的人和远处的滑梯。","问：‘哪个离我们近？哪个在远远的地方？’","宝宝观察后，用‘远远的山’‘近近的小鸟’这类简单语言重复概念。"]},{"title":"不要这样做","items":["不要强迫宝宝必须回答正确。","不要使用“距离、方位”等抽象术语。","不要选择距离差异很小、难以判断的两个物体。","先给宝宝观察时间，不要急着替她回答。"]}]},"数学｜平面图形：认识三角形—到处找一找":{"month_age":18,"week":2,"type":"数学 · 平面图形","title":"认识三角形：到处找一找","intro":"通过重复剪切和“藏起来—找出来”的游戏，继续巩固三角形的外形特征。","sections":[{"title":"学习目标","text":"在上一节制作三角形的基础上，让宝宝通过触摸、剪切和主动寻找，加深对三角形轮廓的记忆。"},{"title":"准备","items":["之前的三角形图形卡片或家长提前剪好的三角形","如让宝宝参与剪切，只使用儿童安全剪刀并全程陪同"]},{"title":"玩法","items":["先重复剪几个三角形，不追求剪得整齐。","把三角形藏在宝宝容易找到且安全的位置，如绘本内页、玩具筐边缘、沙发附近。","邀请宝宝开启‘找三角形大挑战’，给她时间自己观察。","找到后及时肯定，再换位置重复几轮。"]},{"title":"注意","items":["不要藏在高处、尖锐物品或电器附近。","不要过度提示或催促。","宝宝找错图形时不要批评，可提醒‘我们找有三个角、三条边的三角形’。"]}],"images":[{"src":"data/assets/18m/week2/triangle-reference.png","title":"三角形参考图","caption":"先一起观察三角形的外形，再开始“到处找一找”的游戏。"}]},"数学｜观察能力：失物招领 2":{"month_age":18,"week":2,"type":"数学 · 观察能力","title":"失物招领 2","intro":"通过帮蝴蝶结和帽子找主人，练习有顺序地观察、筛选和匹配。","sections":[{"title":"练习重点","text":"核心不是尽快找对，而是形成‘先看失物 → 一个一个找 → 对应主人’的观察顺序。"},{"title":"怎么做","items":["先遮住练习卡上方一部分，只让宝宝清楚看到待寻找的失物：蝴蝶结和帽子。","先找蝴蝶结主人，问‘谁戴了蝴蝶结呀？’，引导宝宝找到鸭子女士。","再找帽子主人，让宝宝逐个比较，最终找到猴子先生。","每完成一个匹配就给予简短肯定，再继续下一个。"]},{"title":"家长提示","items":["提示要简洁，不直接告诉答案。","按‘一个一个找’的节奏进行，避免让宝宝盲目扫视。","宝宝有兴趣时可以重复同一张练习卡，强化有序观察的思路。"]}],"images":[{"src":"data/assets/18m/week2/lost-found-2.png","title":"失物招领 2","caption":"先看清桌上的蝴蝶结和帽子，再帮它们找到主人。"}]},"语文｜宝宝版文学童谣：兰":{"month_age":18,"week":2,"type":"语文 · 文学童谣","title":"兰","intro":"短句、有节奏的文学童谣，适合亲子慢读和重复听。","sections":[{"title":"童谣内容","lyrics":"兰草草，叶子长\n静静开，淡淡香\n不爱闹，爱清爽\n窗台上，春风凉"},{"title":"怎么读","items":["语速放慢，每句之间稍微停顿。","读到‘香’可以做闻花的动作，读到‘春风凉’可以轻轻吹气或挥手模拟风。","以听和感受节奏为主，不要求宝宝背诵。"]}]},"早教课：锻炼口肌力量":{"month_age":18,"week":2,"type":"早教课","title":"锻炼口肌力量：吹纸巾","intro":"通过吹气小游戏练习主动呼气和口部肌肉控制。","sections":[{"title":"准备材料","items":["一小块轻薄纸巾","平整、干净的桌面或地面"]},{"title":"玩法","items":["把纸巾撕成容易吹动的小块。","家长先示范对着纸巾吹气，让纸巾移动。","邀请宝宝一起吹，可以玩‘谁吹得更远’。","宝宝成功吹动后马上给予简单肯定。"]},{"title":"重点","text":"把它当成模仿和游戏即可，不要求宝宝一次就吹得很远或动作标准。"}]},"语文｜中文儿歌：《m音儿歌：小懒猫》":{"type":"语文 · 中文儿歌","title":"m音儿歌：小懒猫","intro":"通过短儿歌反复听、说 m 音相关词语，配合猫咪动作做轻松语言浸润。","sections":[{"title":"儿歌内容","lyrics":"猫咪猫咪，猫咪猫咪\n摸猫猫，摸猫猫\n门边眯眼慢摇摇\n明媚阳光满身跳\n美梦里面，喵喵喵"},{"title":"怎么玩","items":["家长先用有节奏、稍夸张的语气念一遍。","念到“猫咪”“摸猫猫”时配合摸一摸、做猫咪动作。","念到“喵喵喵”时邀请宝宝模仿猫叫即可，不要求完整跟读。"]}],"month_age":18,"week":3},"英语｜一阶儿歌：Good Morning, Mr. Rooster（早上好，公鸡先生）":{"type":"英语 · 一阶儿歌","title":"Good Morning, Mr. Rooster","intro":"通过早安问候和公鸡叫声，重复建立 Good morning 的日常语义。","sections":[{"title":"核心表达","items":["Good morning. 早上好。","Good morning to you. 早上好，亲爱的你。","Good morning, Mr. Rooster. 早上好，公鸡先生。","Cock-a-doodle-doo. 公鸡喔喔喔地叫。"]},{"title":"家长带法","items":["早晨起床、拉开窗帘时直接唱一两句，不必每次完整唱完。","唱到 Mr. Rooster 时做公鸡动作或模仿公鸡叫声。","把 Good morning 用在真实早晨问候中，让宝宝把歌曲和生活场景联系起来。"]}],"month_age":18,"week":3},"英语｜分级绘本：What Color Is It? — Orange（简单版）":{"type":"英语 · 分级绘本","title":"What Color Is It? — Orange","intro":"围绕橙色物品反复练习同一个问答句型，在重复中建立 orange 的理解。","sections":[{"title":"核心句型","items":["What color is it?","It is orange."]},{"title":"绘本中的橙色物品","items":["orange 橙子","carrot 胡萝卜","pumpkin 南瓜","basketball 篮球","orange sun-shaped balloon 橙色太阳造型气球"]},{"title":"怎么读","items":["家长指着图片问 What color is it?，稍停顿给宝宝回应机会。","宝宝只说 orange 或用手指认都可以，再由家长补完整句 It is orange.","在吃橙子、胡萝卜或看到篮球、南瓜时继续重复同一句型。"]}],"month_age":18,"week":3,"images":[{"src":"data/assets/18m/week3/orange-book-page-1.png","title":"Orange 绘本图 1","caption":"先观察图片里的橙色动物或物品，再问：What color is it?"},{"src":"data/assets/18m/week3/orange-book-page-2.png","title":"Orange 绘本图 2","caption":"继续重复句型：It is orange."}]},"数学｜生活数学：估算":{"type":"数学 · 生活数学","title":"生活里的数学：估算","intro":"不用精确数数，先凭第一眼判断哪堆多、哪堆少，建立初步数量感。","sections":[{"title":"学习目标","text":"让宝宝理解估算是“不精确数数，先做初步判断”，重点培养数量感和直观比较能力。"},{"title":"怎么做","items":["准备小木棍、纸片、水果、蓝莓等日常小物。","先从数量差异明显的两堆开始，例如 1 个和 8 个，让宝宝第一眼判断哪堆多。","宝宝适应后再逐渐缩小差距，例如 4 个和 5 个。","把练习融入日常，不需要专门坐下来上课。"]},{"title":"注意","items":["不要一开始就选数量非常接近的组合。","不要把估算变成必须答准的测试。","判断错了也不批评，重点是愿意观察和比较。"]}],"month_age":18,"week":3},"数学｜平面图形：认识三角形—点点点":{"type":"数学 · 平面图形","title":"认识三角形：点点点","intro":"通过“找三角形 + 用手指点一遍”的小游戏，用视觉和触觉强化图形记忆。","sections":[{"title":"准备","items":["含三角形的图形卡片","让宝宝容易观察和触碰的平整位置"]},{"title":"玩法","items":["家长先示范，一边指出三角形一边说“这是三角形，我们来点点三角形”。","让宝宝用手指逐个找出并点到卡片上的三角形。","完成一轮后可以再重复一次，加深外形记忆。"]},{"title":"注意","items":["不要跳过示范直接要求宝宝完成。","不要催促速度，给足观察和模仿时间。","使用简单语言，不需要讲“三条边、三个角”等抽象定义。"]}],"month_age":18,"week":3},"数学｜观察能力：失物招领 3":{"type":"数学 · 观察能力","title":"失物招领 3","intro":"通过逐一排查丢失物品和动物照片，练习有顺序地观察、排除和匹配。","sections":[{"title":"待找物品","items":["花朵发卡","蜂蜜","黄色团状物品 / 花蜜"]},{"title":"玩法","items":["先明确今天要帮哪些物品找主人，一次只找一个。","找花朵发卡：逐一观察动物照片，通过排除找到小羊。","找蜂蜜：继续逐一排查，锁定狐狸。","找黄色团状物品 / 花蜜：排除错误选项后找到小蜜蜂。","全部完成后给予肯定，可以同一张图片重复玩。"]},{"title":"重点","text":"核心不是快，而是形成“逐一排查 → 排除 → 匹配”的观察思路。"},{"title":"注意","items":["用宝宝听得懂的词描述物品，不急着告诉答案。","排查错误时耐心重新看，不批评。","旧图片也可以反复玩，重复有助于发现更多细节。"]}],"month_age":18,"week":3},"语文｜宝宝版文学童谣：梅":{"type":"语文 · 文学童谣","title":"梅","intro":"短句、有节奏的文学童谣，适合亲子慢读和重复听。","sections":[{"title":"童谣内容","lyrics":"小梅花，冬天开\n不怕冷，红腮腮\n枝头站，风雪来\n点点头，真厉害"},{"title":"怎么读","items":["语速放慢，每句之间稍作停顿。","读到“不怕冷”可以做抱臂或抖一抖的动作，读到“点点头”就一起点头。","以听节奏和理解画面为主，不要求背诵。"]}],"month_age":18,"week":3},"早教课：精细动作":{"type":"早教课","title":"精细动作","intro":"18月龄本周精细动作练习，以日常可重复的小手操作为主。","sections":[{"title":"本周重点","text":"进阶训练宝宝精细动作，强调在生活中随时随地重复练习。"},{"title":"家长带法","items":["选择安全、适合宝宝手部操作的小物或日常用品。","家长先做慢速示范，再让宝宝模仿抓、捏、放等动作。","宝宝能独立完成一部分就及时停手，让她自己尝试。","以短时、多次为主，不追求一次做很久。"]},{"title":"注意","text":"录屏资料以示范为主；当前更新包只整理明确可确认的训练原则，不补写录屏中无法清晰辨认的具体道具或步骤。"}],"month_age":18,"week":3},"语文｜中文儿歌：《n音儿歌：捏泥巴》":{"month_age":18,"week":4,"type":"语文 · 中文儿歌","title":"n音儿歌：捏泥巴","intro":"通过节奏短句反复听、说 n 音相关语言，结合“捏”的动作增加参与感。","sections":[{"title":"儿歌内容","lyrics":"捏泥巴呀，捏泥巴呀\n捏小牛，捏小鸟\n看我捏的泥巴人\n看我捏的小奶牛\n多好呀，多好呀"},{"title":"怎么玩","items":["家长先有节奏地念一遍，念到“捏”时配合双手揉捏动作。","可以用橡皮泥、软面团等安全材料一起做“捏一捏”的动作。","宝宝愿意时跟说单个词、句尾或模仿动作即可，不要求完整跟读。"]}]},"英语｜一阶儿歌：Make a Circle（围个圆圈）":{"month_age":18,"week":4,"type":"英语 · 一阶儿歌","title":"Make a Circle","intro":"通过围圈、变大变小、转圈、上下等动作，把英语词义直接和身体动作连接起来。","sections":[{"title":"核心表达","items":["Make a circle","big / small","round and round","up / down","hello"]},{"title":"怎么玩","items":["家长和宝宝拉手或用手臂做圆圈，听到 Make a circle 就一起围成圆形。","big 时把圈变大，small 时把圈缩小。","round and round 时一起转圈或用手指画圈。","up / down 时配合举手、蹲下或身体升降动作。","最后听到 sit down 时一起坐下。"]},{"title":"重点","text":"重点是让宝宝通过动作理解词义，不要求准确唱完整首歌。"}]},"英语｜分级绘本：What Color Is It? — Yellow（简单版）":{"month_age":18,"week":4,"type":"英语 · 分级绘本","title":"What Color Is It? — Yellow","intro":"围绕黄色物品重复同一个问答句型，在大量重复中建立 yellow 的理解。","sections":[{"title":"核心句型","items":["What color is it?","It is yellow."]},{"title":"绘本中的黄色物品","items":["banana 香蕉","lemon 柠檬","cheese 奶酪","yellow duck 黄色小鸭"]},{"title":"怎么读","items":["家长指着图片问 What color is it?，停顿一下给宝宝回应机会。","宝宝可以先只说 yellow，之后再逐步示范完整句 It is yellow.。","读完后在家里或超市继续寻找黄色物品，把句型带进真实生活。"]}]},"数学｜生活数学：规律":{"month_age":18,"week":4,"type":"数学 · 生活数学","title":"生活里的数学：规律","intro":"用生活中的重复顺序，让宝宝开始感知“重复出现的有序排列”。","sections":[{"title":"学习目标","text":"帮助宝宝感知简单重复规律，并尝试判断下一个应该出现什么。"},{"title":"怎么玩","items":["先用简单图形示范，如“正方形—三角形—正方形—三角形”，问下一项是什么。","用分水果做生活游戏，例如“爸爸一个、妈妈一个、宝宝一个”，重复2–3轮后停下来问下一位是谁。","如果多人序列太难，就简化成三人序列。","还可以用红蓝袜子交替、积木颜色交替等方式反复练习。"]},{"title":"注意","items":["不要一开始使用复杂规律。","宝宝答错时重新演示序列即可，不追求一次答对。","尽量把规律游戏放进真实生活，而不是变成做题。"]}]},"数学｜平面图形：认识三角形—数一数":{"month_age":18,"week":4,"type":"数学 · 平面图形","title":"认识三角形：数一数","intro":"在混合图形中找出三角形，再数一数数量，继续巩固三角形特征。","sections":[{"title":"学习目标","text":"在前期三角形启蒙基础上，通过“找一找、数一数、填一填”练习图形识别、计数和专注观察。"},{"title":"怎么玩","items":["先回顾三角形有3个角、3条边。","从一张“趣味图形大发现”卡片开始，家长先示范找出一个三角形并计数。","让宝宝继续寻找其他三角形，找到一个就一起数一个。","数完后由家长在下方对应格子写下数量；如果没有三角形，可以写0。","一次只做一面或一个区域，不需要把所有卡片一次完成。"]},{"title":"注意","items":["不要跳过三角形特征回顾。","不要催促或强迫一次完成全部练习。","数错或找错时重新观察即可，不批评。"]}],"images":[{"src":"data/assets/18m/week4/triangle-count-1.png","title":"三角形数一数 1","caption":"先找所有三角形，再一起数一数。"},{"src":"data/assets/18m/week4/triangle-count-2.png","title":"三角形数一数 2","caption":"可以从左到右慢慢找，不着急。"},{"src":"data/assets/18m/week4/triangle-count-3.png","title":"三角形数一数 3","caption":"找到一个三角形，就用手指点一个。"},{"src":"data/assets/18m/week4/triangle-count-4.png","title":"三角形数一数 4","caption":"如果宝宝累了，一次只做一张练习卡。"},{"src":"data/assets/18m/week4/triangle-count-5.png","title":"三角形数一数 5","caption":"复习三角形有 3 个角、3 条边。"},{"src":"data/assets/18m/week4/triangle-count-6.png","title":"三角形数一数 6","caption":"家长可以在下方对应格子记录数量。"}]},"数学｜观察能力：失物招领 4":{"month_age":18,"week":4,"type":"数学 · 观察能力","title":"失物招领 4","intro":"通过壳子、奶酪和羽毛找主人，练习有序观察、逐一排除和物品匹配。","sections":[{"title":"失物与主人","items":["壳子 → 乌龟","奶酪 → 小老鼠","羽毛 → 小鸟"]},{"title":"怎么玩","items":["先让宝宝逐一看清今天丢失的3件物品。","一次只找一个物品的主人，不同时寻找多个。","用“是它的吗？不是。是它的吗？”的方式逐一排查。","匹配成功后强调相同特征，例如“你看，这个壳子和乌龟的一模一样”。","第二天可以再玩同一张图，重复练习观察力和记忆力。"]},{"title":"注意","items":["重点是建立有序观察思路，不追求速度。","给宝宝充分思考时间，不直接报答案。","找错时重新引导观察，不批评。"]}],"images":[{"src":"data/assets/18m/week4/lost-found-4.png","title":"失物招领 4","caption":"先看桌上的壳子、奶酪和羽毛，再逐个找主人。"}]},"语文｜宝宝版文学童谣：竹":{"month_age":18,"week":4,"type":"语文 · 宝宝版文学童谣","title":"竹","intro":"用简短童谣感受竹子的形象、节奏和声音。","sections":[{"title":"童谣内容","lyrics":"竹宝宝，个子高\n一节节，爬云霄\n风来啦，摇啊摇\n沙沙响，唱歌谣"},{"title":"怎么玩","items":["念“个子高”时把手举高。","念“一节节”时用手指一段一段往上比。","念“摇啊摇”时轻轻左右摆身体。","念“沙沙响”时用轻柔声音模仿竹叶声。"]}]},"早教课：体会分享的快乐":{"month_age":18,"week":4,"type":"早教课","title":"体会分享的快乐","intro":"在不强迫的前提下，让宝宝体验把食物分享给家人的快乐。","sections":[{"title":"具体操作","items":["准备足够的食物，让宝宝可以分享给家里每一个人。","家长用自然的语言邀请宝宝，例如“这个给妈妈一个，这个给爸爸一个”。","宝宝愿意分享时及时回应和感谢，让她感受到互动的快乐。"]},{"title":"重要提醒","text":"不是为了正式教授“必须分享”。3岁以内保护自我感受更重要；应在不损害宝宝自身利益、不强迫的前提下，让她体验分享带来的快乐和社交好处。"}]}};
+
+function getImportedCourseDetails(){
+  try{
+    const value=JSON.parse(localStorage.getItem("xixi-imported-course-details")||"{}");
+    return value&&typeof value==="object"&&!Array.isArray(value)?value:{};
+  }catch(e){ return {}; }
+}
+function getCourseDetails(){ return {...baseCourseDetails,...getImportedCourseDetails()}; }
+function canonicalCourseKey(value){ return typeof value==='string' ? value.trim() : ''; }
+function getCourseDetail(key){
+  const canonicalKey=canonicalCourseKey(key);
+  return {key:canonicalKey,detail:getCourseDetails()[canonicalKey]||null};
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
+function hasCourseDetail(x){return !!getCourseDetail(x).detail;}
+function normalizeDetailItems(value){
+  if(Array.isArray(value)) return value.filter(item=>item!==null&&item!==undefined&&String(item).trim()!=='').map(String);
+  if(value===null||value===undefined||String(value).trim()==='') return [];
+  return String(value).split(/\r?\n/).map(item=>item.trim()).filter(Boolean);
+}
+function normalizeDetailImages(detailPart){
+  const items=[];
+  if(detailPart&&detailPart.image) items.push({src:detailPart.image,title:detailPart.image_title||detailPart.title||'课程图片',caption:detailPart.image_caption||''});
+  if(detailPart&&Array.isArray(detailPart.images)){
+    detailPart.images.forEach((img,index)=>{
+      if(typeof img==='string') items.push({src:img,title:`课程图片 ${index+1}`,caption:''});
+      else if(img&&typeof img==='object'&&img.src) items.push({src:img.src,title:img.title||`课程图片 ${index+1}`,caption:img.caption||''});
+    });
+  }
+  return items;
+}
+function buildImageGallery(items,heading='图片资料'){
+  const normalized=normalizeDetailImages({images:items});
+  if(!normalized.length) return '';
+  return `<div class="detail-section"><h3>${escapeHtml(heading)}</h3><div class="detail-gallery">${normalized.map(img=>`<figure class="detail-figure"><button type="button" class="detail-image-btn" onclick="openImageViewer('${encodeURIComponent(img.src)}','${encodeURIComponent(img.title||'课程图片')}','${encodeURIComponent(img.caption||'')}')"><img class="detail-gallery-img" src="${img.src}" alt="${escapeHtml(img.title||'课程图片')}" loading="lazy"></button>${img.title||img.caption?`<figcaption class="detail-figcap"><b>${escapeHtml(img.title||'')}</b>${img.caption?`<div>${escapeHtml(img.caption)}</div>`:''}</figcaption>`:''}</figure>`).join('')}</div></div>`;
+}
+
+const audioController=(()=>{
+  const prefKey='xixi-audio-loop-prefs-v1'; let activeAudio=null;
+  const prefs=()=>{try{const x=JSON.parse(localStorage.getItem(prefKey)||'{}');return x&&typeof x==='object'?x:{}}catch(_){return {}}};
+  const loopFor=k=>!!prefs()[k];
+  const saveLoop=(k,v)=>{const x=prefs();x[k]=!!v;localStorage.setItem(prefKey,JSON.stringify(x));};
+  const time=n=>{n=Number.isFinite(n)?Math.max(0,Math.floor(n)):0;return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');};
+  const playerFor=a=>a&&a.closest('[data-audio-player]');
+  function repaint(player){if(!player)return;const a=player.querySelector('audio');const seek=player.querySelector('[data-audio-seek]');const current=player.querySelector('[data-audio-current]');const total=player.querySelector('[data-audio-total]');const play=player.querySelector('[data-audio-action=play]');if(!a)return;if(seek){seek.max=Number.isFinite(a.duration)?a.duration:0;seek.value=a.currentTime||0;}if(current)current.textContent=time(a.currentTime);if(total)total.textContent=time(a.duration);if(play)play.textContent=a.paused?'播放':'暂停';}
+  function pauseAudio(a){if(a&&!a.paused)a.pause();repaint(playerFor(a));if(activeAudio===a)activeAudio=null;}
+  function pauseAllIn(root){root.querySelectorAll('audio[data-course-audio]').forEach(pauseAudio);}
+  function play(a){if(activeAudio&&activeAudio!==a)pauseAudio(activeAudio);activeAudio=a;a.play().then(()=>repaint(playerFor(a))).catch(()=>repaint(playerFor(a)));}
+  function click(event){const action=event.target.closest('[data-audio-action]');if(!action)return;const player=action.closest('[data-audio-player]');const a=player&&player.querySelector('audio[data-course-audio]');if(!a)return;event.preventDefault();let key='';try{key=decodeURIComponent(player.dataset.audioKey||'')}catch(_){key='';}if(action.dataset.audioAction==='play'){a.paused?play(a):pauseAudio(a);}else if(action.dataset.audioAction==='loop'){a.loop=!a.loop;saveLoop(key,a.loop);action.setAttribute('aria-pressed',String(a.loop));action.textContent='循环：'+(a.loop?'开':'关');}}
+  function input(event){const seek=event.target.closest('[data-audio-seek]');if(!seek)return;const a=seek.closest('[data-audio-player]')?.querySelector('audio[data-course-audio]');if(a&&Number.isFinite(a.duration)){a.currentTime=Number(seek.value)||0;repaint(playerFor(a));}}
+  function media(event){const a=event.target;if(!(a instanceof HTMLAudioElement)||!a.matches('audio[data-course-audio]'))return;if(event.type==='play'){if(activeAudio&&activeAudio!==a)pauseAudio(activeAudio);activeAudio=a;}if(event.type==='ended'&&!a.loop)activeAudio=null;repaint(playerFor(a));}
+  function bind(){const root=document.getElementById('content');if(!root||root.dataset.audioControllerBound==='1')return;root.dataset.audioControllerBound='1';root.addEventListener('click',click);root.addEventListener('input',input);['loadedmetadata','timeupdate','play','pause','ended'].forEach(type=>root.addEventListener(type,media,true));}
+  function htmlFor(audio,key){const loop=loopFor(key);return '<div class="detail-section detail-audio-player" data-audio-player data-audio-key="'+encodeURIComponent(key)+'"><h3>儿歌音频</h3><div class="detail-audio-title">'+escapeHtml(audio.title||'课程音频')+'</div><audio preload="metadata" playsinline data-course-audio src="'+escapeHtml(audio.src)+'" '+(loop?'loop':'')+'></audio><div class="audio-controls"><button type="button" class="audio-btn" data-audio-action="play">播放</button><button type="button" class="audio-btn audio-loop" data-audio-action="loop" aria-pressed="'+loop+'">循环：'+(loop?'开':'关')+'</button><span class="audio-time" data-audio-current>0:00</span><span class="audio-time">/</span><span class="audio-time" data-audio-total>0:00</span><input class="audio-seek" data-audio-seek type="range" min="0" max="0" value="0" aria-label="音频进度"></div></div>';}
+  return {bind,pauseAllIn,htmlFor};
+})();
+
+function buildCourseDetailHtml(d,courseKey=''){
+  let html=`<div class="detail-type">🦊 ${escapeHtml(d.type)}</div><div class="detail-title">${escapeHtml(d.title)}</div><div class="detail-sub">${d.month_age?`${escapeHtml(d.month_age)}月龄 · `:''}${d.week?`第${escapeHtml(d.week)}周 · `:''}课程详情</div>`;
+  if(d.intro) html+=`<div class="detail-section"><h3>这一课做什么</h3><p>${escapeHtml(d.intro)}</p></div>`;
+  if(d.audio&&d.audio.src) html+=audioController.htmlFor(d.audio,courseKey);
+  const topImages=normalizeDetailImages(d);
+  if(topImages.length) html+=buildImageGallery(topImages, topImages.length===1?'课程图片':'课程图片 / 练习卡');
+  (d.sections||[]).forEach(s=>{
+    html+=`<div class="detail-section"><h3>${escapeHtml(s.title)}</h3>`;
+    if(s.text) html+=`<p>${escapeHtml(s.text)}</p>`;
+    if(s.lyrics) html+=`<div class="detail-lyrics">${escapeHtml(s.lyrics)}</div>`;
+    const sectionItems=normalizeDetailItems(s.items);
+    if(sectionItems.length) html+=`<ul>${sectionItems.map(i=>`<li>${escapeHtml(i)}</li>`).join('')}</ul>`;
+    const sectionImages=normalizeDetailImages(s);
+    if(sectionImages.length) html+=buildImageGallery(sectionImages,'相关图片');
+    html+='</div>';
+  });
+  html+='<div class="detail-tip">课程详情用于家长执行参考；带图片的课程现在可以直接在这里看练习卡，点击图片可放大。</div>';
+  return html;
+}
+function handleCourseDetailClick(event){
+  const root=document.getElementById('content');
+  const btn=event.target.closest('[data-course-detail]');
+  if(!root||!btn||!root.contains(btn)) return;
+  event.preventDefault();
+  event.stopPropagation();
+  let key='';
+  try{ key=decodeURIComponent(btn.dataset.courseDetail||''); }catch(_){ return; }
+  const {detail}=getCourseDetail(key);
+  if(!detail) return;
+  const card=btn.closest('.item');
+  const panel=card&&card.querySelector('.inline-course-detail');
+  if(!panel) return;
+  const opening=panel.hasAttribute('hidden');
+  audioController.pauseAllIn(root);
+  root.querySelectorAll('.inline-course-detail:not([hidden])').forEach(x=>x.setAttribute('hidden',''));
+  root.querySelectorAll('[data-course-detail].expanded').forEach(x=>{x.classList.remove('expanded');x.textContent='查看玩法 ›';});
+  if(opening){
+    panel.innerHTML=buildCourseDetailHtml(detail,key);
+    panel.removeAttribute('hidden');
+    btn.classList.add('expanded');
+    btn.textContent='收起玩法 ↑';
+    setTimeout(()=>{if(panel.isConnected&&!panel.hasAttribute('hidden')) panel.scrollIntoView({behavior:'smooth',block:'nearest'});},30);
+  }
+}
+function bindDetailButtons(){
+  const root=document.getElementById('content');
+  if(!root||root.dataset.detailControllerBound==='1') return;
+  root.dataset.detailControllerBound='1';
+  root.addEventListener('click',handleCourseDetailClick,false);
+}
+function openImageViewer(src,title,caption){
+  const modal=document.getElementById('imageViewer');
+  const img=document.getElementById('imageViewerImg');
+  const cap=document.getElementById('imageViewerCaption');
+  const decodedSrc=decodeURIComponent(src||'');
+  const decodedTitle=decodeURIComponent(title||'');
+  const decodedCaption=decodeURIComponent(caption||'');
+  img.src=decodedSrc;
+  img.alt=decodedTitle||'课程图片';
+  const parts=[decodedTitle,decodedCaption].filter(Boolean);
+  if(parts.length){
+    cap.innerHTML=parts.map(escapeHtml).join('<br>');
+    cap.hidden=false;
+  }else{
+    cap.hidden=true;
+    cap.innerHTML='';
+  }
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeImageViewer(event){
+  if(event && event.target!==document.getElementById('imageViewer')) return;
+  const modal=document.getElementById('imageViewer');
+  modal.classList.remove('open');
+  document.getElementById('imageViewerImg').src='';
+  document.getElementById('imageViewerCaption').hidden=true;
+  document.getElementById('imageViewerCaption').innerHTML='';
+  document.body.style.overflow='';
+}
+
+function openCourseDetail(key){
+  const {detail:d}=getCourseDetail(key); if(!d) return;
+  document.getElementById('detailBody').innerHTML=buildCourseDetailHtml(d,key);
+  document.getElementById('detailModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCourseDetail(e){
+  if(e && e.target!==document.getElementById('detailModal')) return;
+  document.getElementById('detailModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function getTypeMeta(type){
+  const map={
+    "语文":{icon:"icon-lang.svg",cls:"lang"},
+    "数学":{icon:"icon-math.svg",cls:"math"},
+    "英语":{icon:"icon-eng.svg",cls:"eng"},
+    "早教课":{icon:"icon-lesson.svg",cls:"lesson"},
+  };
+  return map[type]||{icon:"icon-other.svg",cls:"other"};
+}
+function formatPlanItem(x,i,dailyLen){
+  const parts=x.split("｜");
+  const hasType=parts.length>1;
+  const type=hasType?parts.shift():"启蒙";
+  const content=hasType?parts.join("｜"):x;
+  const meta=getTypeMeta(type);
+  const hasDetail=hasCourseDetail(x);
+  return `<div class="item ${i>=dailyLen?'extra':''}">
+    <input type="checkbox" aria-label="完成此课程" ${localStorage.getItem(key(i))==='1'?'checked':''} onchange="localStorage.setItem(key(${i}),this.checked?'1':'0');updateProgress()">
+    <div class="label">
+      <div class="course-line"><span class="type-chip ${meta.cls}"><img class="type-ill" src="${meta.icon}" alt="${type}">${type}</span>${hasDetail?`<button type="button" class="detail-btn" data-course-detail="${encodeURIComponent(canonicalCourseKey(x))}">查看玩法 ›</button>`:''}</div>
+      <div class="course-text">${content}</div>
+    </div>
+    ${hasDetail?'<div class="inline-course-detail" hidden></div>':''}
+  </div>`;
+}
+function renderStorybookHero(w,items){
+  const hero=document.getElementById("storybookHero");
+  if(!hero) return;
+  hero.innerHTML=`<img class="story-fox" src="top-avatar.png" alt="小狐狸绘本伙伴">
+    <div class="story-copy">
+      <div class="story-kicker">🦊 今日启蒙绘本</div>
+      <div class="story-title">和小狐狸一起打开今天的学习小故事</div>
+      <div class="story-sub">${matchedMonthAge}月龄 · 第${w.week}周 · ${days[currentDay]}${extraDays.has(currentDay)?' · 今天有加餐内容':''}</div>
+      <div class="story-mini"><span>共 ${items.length} 项任务</span><span>${items[0]?items[0].split("｜")[0]:"启蒙"} 开始</span><span>完成后记得打卡</span></div>
+    </div>`;
+}
+
+function getItemsForDay(w,dayIndex){
+  const items=[...w.daily];
+  if(extraDays.has(dayIndex)&&w.extra_course) items.push(w.extra_course);
+  return items;
+}
+function weekKey(dayIndex,i){
+  return `xixi-m${matchedMonthAge}-w${currentWeek+1}-d${dayIndex+1}-i${i}`;
+}
+function renderWeeklyStats(w){
+  const box=document.getElementById("weeklyStatsCard");
+  if(!box) return;
+  let weekDone=0, weekTotal=0;
+  const dayBlocks = days.map((d,dayIndex)=>{
+    const items = getItemsForDay(w,dayIndex);
+    const total = items.length;
+    const done = items.filter((_,i)=>localStorage.getItem(weekKey(dayIndex,i))==='1').length;
+    weekDone += done;
+    weekTotal += total;
+    const pct = total?Math.round(done/total*100):0;
+    return `<div class="weekly-day ${dayIndex===currentDay?'active':''}">
+      <div class="weekly-day-name">${d}</div>
+      <div class="weekly-mini-bar"><div class="weekly-mini-fill" style="width:${pct}%"></div></div>
+      <div class="weekly-mini-text">${done}/${total}</div>
+    </div>`;
+  }).join('');
+  const pct = weekTotal?Math.round(weekDone/weekTotal*100):0;
+  let note = '坚持每天一点点，小狐狸会一直陪你完成这一周。';
+  if(pct===100) note='太棒了，这一周已经全部完成啦！';
+  else if(pct>=80) note='这一周快完成啦，再坚持一下就能满满达成。';
+  else if(pct>=50) note='本周进度过半，继续保持现在的节奏。';
+  box.innerHTML = `<div class="weekly-head">
+      <div>
+        <div class="weekly-kicker">📊 每周完成率</div>
+        <div class="weekly-title">第${w.week}周完成统计</div>
+        <div class="weekly-sub">看看这一周每天的启蒙打卡进度吧</div>
+      </div>
+      <div class="weekly-pill">${weekDone}/${weekTotal} · ${pct}%</div>
+    </div>
+    <div class="weekly-days">${dayBlocks}</div>
+    <div class="weekly-note">${note}</div>`;
+}
+
+function renderReward(done,total,pct){
+  const box=document.getElementById("rewardCard");
+  if(!box) return;
+  const stars = total===0 ? 0 : (pct===0 ? 0 : Math.ceil(pct/20));
+  let title="今天开始收集小星星吧";
+  let sub="完成一项就会离今天的小奖励更近一点。";
+  if(pct>=100){ title="太棒了，今天的小星星全部点亮啦！"; sub="小狐狸为你送上 5 颗闪亮小星星，今天的启蒙任务完成得真棒。"; }
+  else if(pct>=80){ title="已经快完成啦，再加把劲！"; sub="你已经收集到很多小星星了，完成最后一点点就能全部点亮。"; }
+  else if(pct>=50){ title="做得很不错，继续前进！"; sub="小狐狸看到你在认真打卡，今天的绘本旅程已经过半。"; }
+  else if(pct>0){ title="获得小星星啦，继续加油！"; sub="每完成一项任务，都会点亮更多小星星。"; }
+  const starsHtml = Array.from({length:5}, (_,i)=>`<span class="reward-star ${i<stars?'on':'off'}">⭐</span>`).join('');
+  box.innerHTML = `<img class="reward-fox" src="top-avatar.png" alt="小狐狸奖励">
+    <div class="reward-copy">
+      <div class="reward-kicker">⭐ 今日完成奖励</div>
+      <div class="reward-title">${title}</div>
+      <div class="reward-sub">${sub}</div>
+      <div class="reward-stars">${starsHtml}</div>
+      <div class="reward-pill">已完成 ${done} / ${total} · ${pct}%</div>
+    </div>`;
+}
+
+function render(){
+  audioController.pauseAllIn(document.getElementById('content'));
+  renderProfileSummary();
+  renderTabs();
+  const ws=currentPlanWeeks();
+  const w=ws[currentWeek];
+  const items=getItemsForDay(w,currentDay);
+  renderStorybookHero(w,items);
+  renderWeeklyStats(w);
+  let html=`<div class="section-title">🦊 ${matchedMonthAge}月龄 · 第${w.week}周 · ${days[currentDay]}
+    ${extraDays.has(currentDay)?'<span class="badge">加强日</span>':''}</div>`;
+  html += items.map((x,i)=>formatPlanItem(x,i,w.daily.length)).join("");
+  document.getElementById("content").innerHTML=html;
+  bindDetailButtons();
+  audioController.bind();
+  updateProgress();
+}
+function updateProgress(){
+  const boxes=[...document.querySelectorAll('#content input[type=checkbox]')];
+  const done=boxes.filter(x=>x.checked).length;
+  const pct=boxes.length?Math.round(done/boxes.length*100):0;
+  document.getElementById("bar").style.width=pct+"%";
+  document.getElementById("progressText").textContent=`今日完成 ${done} / ${boxes.length}（${pct}%）`;
+  renderReward(done,boxes.length,pct);
+}
+function resetToday(){
+  [...document.querySelectorAll('#content input[type=checkbox]')].forEach((x,i)=>localStorage.removeItem(key(i)));
+  render();
+}
+function resetAll(){
+  if(confirm("确定清空全部打卡记录吗？")){
+    Object.keys(localStorage).filter(k=>k.startsWith("xixi-m")).forEach(k=>localStorage.removeItem(k));
+    render();
+  }
+}
+syncScheduleToToday();
+render();
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
+</script>
+</body>
+</html>
