@@ -1,4 +1,4 @@
-const CACHE="xixi-ece-v20261016-20mweek2-2";
+const CACHE="xixi-ece-v20261027-20mweek3-1";
 const PRODUCTION_CACHE_PATTERN=/^xixi-ece-v\d+-.*-\d+$/;
 const SHELL=["./","./index.html","./manifest.webmanifest","./apple-touch-icon.png","./icon-192.png","./icon-512.png","./top-avatar.png","./fox-app-icon.png","./triangle-reference.png","./icon-lang.svg","./icon-math.svg","./icon-eng.svg","./icon-lesson.svg","./icon-other.svg","./data/curriculum.json"];
 const SCOPE_URL=new URL(self.registration.scope);
