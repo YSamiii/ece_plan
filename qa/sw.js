@@ -1,4 +1,4 @@
-const CACHE="xixi-ece-v20261016-20mweek2-qa2";
+const CACHE="xixi-ece-v20261027-20mweek3-qa1";
 const QA_CACHE_PATTERN=/^xixi-ece-v\d+-.*-qa\d+$/;
 const SHELL=["./","./index.html","./manifest.webmanifest","./apple-touch-icon.png","./icon-192.png","./icon-512.png","./top-avatar.png","./fox-app-icon.png","./triangle-reference.png","./icon-lang.svg","./icon-math.svg","./icon-eng.svg","./icon-lesson.svg","./icon-other.svg","./data/curriculum.json"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()));});
